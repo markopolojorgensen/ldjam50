@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://_addons/marko_parallax.gd" type="Script" id=3]
+
+[node name="marko_parallax" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="."]
+visible = false
+rect = Rect2( -1000, -1000, 2000, 2000 )
+
+[connection signal="screen_entered" from="visibility_notifier_2d" to="." method="_on_visibility_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="visibility_notifier_2d" to="." method="_on_visibility_notifier_2d_screen_exited"]
