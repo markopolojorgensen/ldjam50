@@ -30,6 +30,8 @@ extends Node2D
 # background should be less than one
 export(float) var parallax_scale = 1.0
 
+export(bool) var debug = false
+
 var camera : Camera2D
 # original positions of children
 # local, not global, positions
@@ -148,7 +150,8 @@ func position_self():
 	# absolutely cannot use camera.get_global_position here since that 
 	# does not reflect the actual viewport location as affected by limits
 	var camera_center = get_camera_center()
-	var self_motion = camera_center - global_position
+#	var self_motion = camera_center - global_position
+	var self_motion = camera_center - (original_positions[self] + get_parent().global_position)
 	
 	# var other_time = OS.get_ticks_usec() - other_start
 	# var calc_start = OS.get_ticks_usec()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cycle/decorations/round_bunting.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cycle/decoration_distributor.gd" type="Script" id=2]
+
+[node name="decoration_distributor" type="Node2D"]
+position = Vector2( -301, -154 )
+script = ExtResource( 2 )
+decoration_scene = ExtResource( 1 )
+decoration_count = 10

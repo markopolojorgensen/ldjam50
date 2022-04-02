@@ -1,0 +1,21 @@
+
+TODO
+  environment art
+  button to prematurely end cycle
+  safe house / base
+    time should pause when you're inside
+
+
+
+
+enemies???
+
+
+
+
+
+DONE
+  hourglass pickups should immediately add time?
+  player jump
+  autotile check
+
