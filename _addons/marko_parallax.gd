@@ -29,6 +29,7 @@ extends Node2D
 # foreground should be more than one
 # background should be less than one
 export(float) var parallax_scale = 1.0
+export(float) var parallax_scale_v = -1
 
 export(bool) var debug = false
 
@@ -42,6 +43,8 @@ var child_index = 0
 # use activate() and deactivate()
 export(bool) var active = true
 
+export(bool) var auto_modulate = true
+
 # set by visibility_notifier
 var is_on_screen = false
 
@@ -54,6 +57,13 @@ func _ready():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
+	if auto_modulate:
+		var modulate_weight = abs(1.0 - parallax_scale) / 0.2
+		var value = lerp(1.0, 0.375, modulate_weight)
+		modulate = Color(value, value, value)
+	else:
+		modulate = Color.white
+	
 	if $visibility_notifier_2d.is_on_screen():
 		_on_visibility_notifier_2d_screen_entered()
 	else:
@@ -65,7 +75,7 @@ func set_original_position(child, original_position):
 	child.position = original_position
 
 func _process(_delta):
-	# all_children_process()
+#	all_children_process()
 	if is_on_screen and active:
 		position_self()
 
@@ -125,7 +135,11 @@ func all_children_process():
 				#   the position adjustment is not using the same vector basis
 				#   as the camera.
 				# child.position = original_positions[child] + (motion * (1.0 - parallax_scale))
-				child.position = original_positions[child] - self_position_offset + (motion * (1.0 - parallax_scale)).rotated(-global_rotation)
+				child.position.x = original_positions[child].x - self_position_offset.x + (motion * (1.0 - parallax_scale)).rotated(-global_rotation).x
+				if 0 <= parallax_scale_v:
+					child.position.y = original_positions[child].y - self_position_offset.y + (motion * (1.0 - parallax_scale_v)).rotated(-global_rotation).y
+				else:
+					child.position.y = original_positions[child].y - self_position_offset.y + (motion * (1.0 - parallax_scale)).rotated(-global_rotation).y
 #				global_performance.log_performance_data("child_transform_calls", 1)
 		for child in to_remove:
 			remove_child(child)
@@ -155,7 +169,13 @@ func position_self():
 	
 	# var other_time = OS.get_ticks_usec() - other_start
 	# var calc_start = OS.get_ticks_usec()
-	var calculated_position = original_positions[self] + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation)
+#	var calculated_position = original_positions[self] + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation)
+	var calculated_position = Vector2()
+	calculated_position.x = original_positions[self].x + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation).x
+	if 0 <= parallax_scale_v:
+		calculated_position.y = original_positions[self].y + (self_motion * (1.0 - parallax_scale_v)).rotated(-global_rotation).y
+	else:
+		calculated_position.y = original_positions[self].y + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation).y
 	# var calc_time = OS.get_ticks_usec() - calc_start
 	# var assign_start = OS.get_ticks_usec()
 	position = calculated_position

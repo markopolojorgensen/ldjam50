@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cycle/decorations/hat.gd" type="Script" id=1]
+[ext_resource path="res://cycle/decorations/hats.png" type="Texture" id=2]
+
+[node name="hat" type="Sprite"]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -60 )
+hframes = 3
+script = ExtResource( 1 )

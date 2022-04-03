@@ -1,11 +1,18 @@
 extends RigidBody2D
 
-const max_speed = 400
+const max_speed = 350
 const max_acceleration = 2000
+
+const initial_jump_magnitude = 500
+const continuous_jump_magnitude = 350
+
 
 var wants_to_jump = false
 var touching_ground = false
 
+
+func _enter_tree():
+	global.current_player = self
 
 func _process(_delta):
 	var intended_direction = $intended_direction.get_intended_direction()
@@ -41,7 +48,9 @@ func _process(_delta):
 
 
 func _integrate_forces(state):
-	if not touching_ground and $ground_detector.is_colliding() and wants_to_jump:
+	if touching_ground and not $ground_detector.is_colliding():
+		$coyote_time.start()
+	if not touching_ground and $ground_detector.is_colliding() and wants_to_jump and 0 <= state.linear_velocity.y:
 		start_jump()
 	touching_ground = $ground_detector.is_colliding()
 	# $label.text = "touching ground: %s" % str(touching_ground)
@@ -65,7 +74,7 @@ func _integrate_forces(state):
 		# TODO: slow down
 	
 	if wants_to_jump:
-		apply_central_impulse(Vector2(0, -300) * state.step)
+		apply_central_impulse(Vector2(0, -continuous_jump_magnitude) * state.step)
 	
 	if $fall_ray.is_colliding() and 20 < linear_velocity.y:
 		var speed_diff = 20 - linear_velocity.y
@@ -74,21 +83,21 @@ func _integrate_forces(state):
 	$fall_ray.cast_to.y = clamp(linear_velocity.y * state.step * 3, 1.0, INF)
 
 func start_jump():
-	apply_central_impulse(Vector2(0, -600))
+	apply_central_impulse(Vector2(0, -initial_jump_magnitude))
 	$animated_sprite.play("jump_start")
 
 
 func _unhandled_input(event):
 	if event.is_action_pressed("jump"):
-		get_tree().set_input_as_handled()
+		# get_tree().set_input_as_handled()
 		wants_to_jump = true
-		if touching_ground:
+		if (touching_ground or not $coyote_time.is_stopped()) and 0 <= linear_velocity.y:
 			start_jump()
 	elif event.is_action_released("jump"):
 		get_tree().set_input_as_handled()
 		wants_to_jump = false
 		if linear_velocity.y < 0:
-			apply_central_impulse(Vector2(0, linear_velocity.y * -1.1))
+			apply_central_impulse(Vector2(0, linear_velocity.y * -1))
 
 
 

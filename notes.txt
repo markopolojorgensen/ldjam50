@@ -1,10 +1,12 @@
 
 TODO
-  environment art
-  button to prematurely end cycle
-  safe house / base
-    time should pause when you're inside
+  DJ
+  
+  more areas / levels
+  combat?
 
+
+  safe-house should always recharge time left to ~30 seconds
 
 
 
@@ -15,6 +17,12 @@ enemies???
 
 
 DONE
+  scary time-is-almost-up screen effect
+  coyote time
+  button to prematurely end cycle
+  safe house / base (time paused while inside)
+  decoration distribution
+  environment art
   hourglass pickups should immediately add time?
   player jump
   autotile check

@@ -1,0 +1,146 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://cycle/decorations/round_bunting.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cycle/decorations/triangle_bunting.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cycle/decorations/decoration_distributor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cycle/decorations/decoration_scene_count.tscn" type="PackedScene" id=4]
+[ext_resource path="res://cycle/decorations/board.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cycle/decorations/streamer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://cycle/decorations/hat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://cycle/decorations/floor_balloon.tscn" type="PackedScene" id=8]
+[ext_resource path="res://_addons/marko_parallax.tscn" type="PackedScene" id=9]
+[ext_resource path="res://cycle/green_tileset.tres" type="TileSet" id=10]
+[ext_resource path="res://cycle/decorations.gd" type="Script" id=11]
+
+[node name="copy_pasta_scene" type="Node2D"]
+
+[node name="ceiling_decoration_distributor" parent="." instance=ExtResource( 3 )]
+position = Vector2( 272, 200 )
+add_to_layer_104 = false
+add_to_layer_108 = false
+add_to_layer_112 = false
+add_to_layer_116 = false
+add_to_layer_120 = false
+
+[node name="position_2d" type="Position2D" parent="ceiling_decoration_distributor"]
+position = Vector2( 544, 0 )
+
+[node name="scene_counts" type="Node" parent="ceiling_decoration_distributor"]
+
+[node name="decoration_scene_count" parent="ceiling_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 1 )
+count = 3
+
+[node name="decoration_scene_count2" parent="ceiling_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 6 )
+count = 1
+
+[node name="decoration_scene_count3" parent="ceiling_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 2 )
+count = 1
+
+[node name="decoration_scene_count4" parent="ceiling_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 5 )
+count = 3
+only_extremes = true
+distribute_evenly = true
+
+[node name="floor_decoration_distributor" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3, 376 )
+orientation = "down"
+
+[node name="position_2d" type="Position2D" parent="floor_decoration_distributor"]
+position = Vector2( 784, 0 )
+
+[node name="scene_counts" type="Node" parent="floor_decoration_distributor"]
+
+[node name="decoration_scene_count" parent="floor_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+count = 2
+
+[node name="decoration_scene_count2" parent="floor_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 7 )
+count = 0
+back_count = 3
+
+[node name="decoration_scene_count3" parent="floor_decoration_distributor/scene_counts" instance=ExtResource( 4 )]
+decoration_scene = ExtResource( 8 )
+count = 40
+
+[node name="room3" type="Node2D" parent="."]
+position = Vector2( 1697, 1460 )
+
+[node name="tile_map" type="TileMap" parent="room3"]
+tile_set = ExtResource( 10 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="decoration_v_locked" type="Node2D" parent="room3"]
+script = ExtResource( 11 )
+
+[node name="configuration" type="Node2D" parent="room3/decoration_v_locked"]
+
+[node name="parallax_nodes" type="Node2D" parent="room3/decoration_v_locked"]
+
+[node name="marko_parallax_80" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = -1
+parallax_scale = 0.8
+parallax_scale_v = 1.0
+debug = true
+
+[node name="marko_parallax_84" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = -1
+parallax_scale = 0.84
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_88" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = -1
+parallax_scale = 0.88
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_92" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = -1
+parallax_scale = 0.92
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_96" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = -1
+parallax_scale = 0.96
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_100" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_104" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.878431, 0.878431, 0.878431, 1 )
+z_index = 1
+parallax_scale = 1.04
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_108" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+z_index = 1
+parallax_scale = 1.08
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_112" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+z_index = 1
+parallax_scale = 1.12
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_116" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+z_index = 1
+parallax_scale = 1.16
+parallax_scale_v = 1.0
+
+[node name="marko_parallax_120" parent="room3/decoration_v_locked/parallax_nodes" instance=ExtResource( 9 )]
+modulate = Color( 0.376471, 0.376471, 0.376471, 1 )
+z_index = 1
+parallax_scale = 1.2
+parallax_scale_v = 1.0

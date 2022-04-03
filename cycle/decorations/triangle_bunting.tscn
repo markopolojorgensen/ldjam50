@@ -6,7 +6,7 @@
 [sub_resource type="Curve2D" id=1]
 bake_interval = 7.0
 _data = {
-"points": PoolVector2Array( -149.502, -40.0452, 149.502, 40.0452, 0, 0, -126.045, 33.2254, 126.045, -33.2254, 330, -1 )
+"points": PoolVector2Array( -149.502, -40.0452, 149.502, 40.0452, -160, 0, -126.045, 33.2254, 126.045, -33.2254, 160, 0 )
 }
 
 [node name="triangle_bunting" type="Path2D"]

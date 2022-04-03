@@ -2,6 +2,8 @@ extends Path2D
 
 export(Texture) var triangle_texture
 
+var width = 320
+
 func _ready():
 	var baked_points = curve.get_baked_points()
 	for i in range(baked_points.size()):
