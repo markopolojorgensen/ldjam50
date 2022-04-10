@@ -11,3 +11,14 @@ func add_baloons():
 		var baloon = baloon_scene.instance()
 		add_child(baloon)
 		baloon.position = $position_2d.position
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://cycle/stations/order_station/store_buttons_00.png" type="Texture" id=1]
+[ext_resource path="res://font_w_outline.tres" type="DynamicFont" id=2]
+[ext_resource path="res://cycle/stations/order_station/store_grid_widget.gd" type="Script" id=3]
+[ext_resource path="res://cycle/shrapnel/tinkle.wav" type="AudioStream" id=4]
+
+[node name="texture_button" type="TextureButton"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item_name" type="Label" parent="."]
+margin_top = 37.0
+margin_right = 64.0
+margin_bottom = 51.0
+custom_colors/font_color = Color( 0.623529, 0.815686, 0.498039, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0.0470588, 0.0196078, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Balloons"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cost" type="Label" parent="."]
+margin_top = 47.0
+margin_right = 64.0
+margin_bottom = 61.0
+custom_colors/font_color = Color( 0.623529, 0.815686, 0.498039, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0.0470588, 0.0196078, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "4$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="focus_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0
+pitch_scale = 0.85
+bus = "Effects"

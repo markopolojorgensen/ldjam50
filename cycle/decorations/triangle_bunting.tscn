@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://cycle/decorations/triangle_bunting.gd" type="Script" id=1]
 [ext_resource path="res://cycle/decorations/triangles.png" type="Texture" id=2]
+[ext_resource path="res://cycle/decorations/decoration_purchase_checker.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 7.0
@@ -17,3 +18,5 @@ triangle_texture = ExtResource( 2 )
 [node name="line_2d" type="Line2D" parent="."]
 width = 1.0
 default_color = Color( 0.0156863, 0.313726, 0.0196078, 1 )
+
+[node name="decoration_purchase_checker" parent="." instance=ExtResource( 3 )]

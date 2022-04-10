@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://cycle/hourglass.png" type="Texture" id=1]
 [ext_resource path="res://cycle/hourglass_pickup.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( -0.15749, -3.77976, 0.15749, 3.77976, 15, 0, 3.22855, 0.0787451, -3.22855, -0.0787451, 8, 5, 0, 0, 0, 0, 0, 0, 4.48847, 0.0787451, -4.48847, -0.0787451, -7, -5, -0.0787451, -3.07106, 0.0787451, 3.07106, -13, 0, -4.25223, 0.236235, 4.25223, -0.236235, -7, 5, 0, 0, 0, 0, 0, 0, -4.09474, 0, 4.09474, 0, 8, -5, 0.47247, -3.22855, -0.47247, 3.22855, 15, 0 )
+}
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -14,15 +19,82 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.0161
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("path_2d/path_follow_2d:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("path_2d/path_follow_2d/animated_sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "wobble"
+length = 1.5
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("path_2d/path_follow_2d:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("path_2d/path_follow_2d/animated_sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.74, 1.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 15.0, 0.0, -15.0, 0.0, 15.0 ]
+}
+
 [node name="hourglass_pickup" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="animated_sprite" type="AnimatedSprite" parent="."]
+[node name="path_2d" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="path_follow_2d" type="PathFollow2D" parent="path_2d"]
+position = Vector2( 15, 0 )
+rotate = false
+
+[node name="animated_sprite" type="AnimatedSprite" parent="path_2d/path_follow_2d"]
 frames = SubResource( 2 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_hourglass_pickup_body_entered"]
+[node name="animation_player" type="AnimationPlayer" parent="."]
+autoplay = "wobble"
+anims/RESET = SubResource( 5 )
+anims/wobble = SubResource( 4 )

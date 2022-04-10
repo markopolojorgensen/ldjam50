@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://cycle/npcs/npc.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cycle/npcs/mummy/mummy.png" type="Texture" id=2]
+[ext_resource path="res://cycle/npcs/mummy/npc_mummy.gd" type="Script" id=3]
+
+[node name="npc_mummy" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="half_beat_interval" type="Timer" parent="." index="2"]
+one_shot = true
+
+[connection signal="timeout" from="half_beat_interval" to="." method="_on_half_beat_interval_timeout"]

@@ -1,22 +1,153 @@
-
 TODO
-  DJ
+  punchable walls
+  level design ideas
+    king of the hill / pyramid scheme
+    elevator shaft
+    bunkers / series of pits
+    suspension bridge / series of platforms hanging from the ceiling
+
+  decoration refinement
+    pyramid needs decorations
+    maze needs decorations
+    more disco balls around the place
+    more speakers around the place
+    put piggy banks around
+
+  secrets
+    punchable walls & fake floors
+
+  glowing stars bg decoration?
+
+  disco in the sky shouldn't play base music
+  end screen ramp up sfx / music fade out
+
+  NPCs
+    DJ
+    drunk relative
+    halloween mummy who loves streamers
+    sentient party hat
+
+
+  get_world() -> things need to spawn stuff in the room, since that's what gets unloaded
+
+  music slows down as the countdown approaches zero?
+
+  tutorial
+    this is you
+      wasd / arrow keys to move
+    you love throwing parties
+      x or q activates things you are next to
+    x or q also attacks
+      things can be attacked
+    "this party won't last very long without more merrymakers, I had better invite some people!"
+
+  giant disco in the sky platforms appear based on purchases?
+  takes forever to get up to disco in the sky so you have to have gotten all the time upgrades?
+  balloons drop time particles, but don't increase max?
+
+  upgrades:
+    party hats for pc & npcs
+    punch bowl that sells multi-jump
+    juke box that sells hourglasses
+    run faster when less than 20 seconds left
+    stamina / sprint ability
+
+
+"do you have x? I'll come to your party if you have x."
+friends only join the party if you have what they like (and if you have met them)
+spend money to buy decorations (makes decorations appear and friends will move to the party)
+the more friends you have at the party the more time you have?
+  music
+  floor balloons
+  balloon bundles
+  party hats
+  streamers
+  round bunting
+  triangular bunting
+  disco balls
+  speaker stacks
+  rafters
+
+
+
+
+art ideas
+  chairs
+  cake area
+    candles - birthday candles / number candles
+    cakes w/ frosting
+  halloween party
+    spooky spiderwebs
+  christmas party
+    christmas tree
+    baubles
+    snowflakes
+    stars
+  rave
+    giant speaker stacks everywhere
+  formal dress party
+    hanging tie decorations
+  graduation zone?
+  apocalypse party
+    "the end is nigh" banners
+  drinks
+    cups w/ ice
+    crazy straws
   
-  more areas / levels
-  combat?
+  disco ball?
+
+  party hats
+    stereotypical cone hat
+    tie around your head
+    paper crown
 
 
-  safe-house should always recharge time left to ~30 seconds
 
 
 
-enemies???
+
+
+hourglass pickups:
+  1: maze
+  2: rafters
+  3: pyramid
+
+piggy banks
+  1 & 2: pyramid
+
+
 
 
 
 
 
 DONE
+  show end screen after numbers go crazy
+  sign that says "big disco in the sky ^"
+  balloons keep themselves reachable
+  "as far as i know, that party is still going" end screen
+  beat count should reset when a track loops
+  attack should send you slightly up if you're in the air
+  bouncing stereo art for music purchase
+  rafters: more decoration adjustments
+  buyable party hats
+  buyable triangle bunting
+  buyable round bunting
+  buyable floor balloons
+  buyable balloon clusters
+  empty space "music"
+  level idea: huge flat w/ distant hat mountains
+  safehouse recharges time left
+  less foreground distractions in the main party zone
+  don't let stuff get purchased twice
+  buyable disco balls
+  buyable streamers
+  cant afford it sfx
+  initial sfx pass
+  re-do the maze to be actually navigable
+  coin pickup polish
+  paunch vfx
+  initial player combat poses
   scary time-is-almost-up screen effect
   coyote time
   button to prematurely end cycle

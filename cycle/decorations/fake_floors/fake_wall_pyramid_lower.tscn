@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://cycle/decorations/fake_floors/fake_floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cycle/decorations/fake_floors/fake_wall_pyramid_lower.png" type="Texture" id=2]
+[ext_resource path="res://cycle/decorations/fake_floors/punchable_wall.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 36 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 27 )
+
+[node name="fake_wall_pyramid_lower" instance=ExtResource( 1 )]
+require_punch = true
+shrapnel_count = 10
+
+[node name="fake_floor" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="collision_shape_2d" parent="." index="1"]
+visible = false
+position = Vector2( -1, -3 )
+shape = SubResource( 1 )
+
+[node name="position_2d" parent="boom_lines" index="0"]
+position = Vector2( -6, -21 )
+
+[node name="position_2d2" parent="boom_lines/position_2d" index="0"]
+position = Vector2( -1, 42 )
+
+[node name="position_2d2" parent="boom_lines" index="1"]
+position = Vector2( 6, -23 )
+
+[node name="position_2d2" parent="boom_lines/position_2d2" index="0"]
+position = Vector2( -1, 45 )
+
+[node name="punchable_wall" type="StaticBody2D" parent="." index="3"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="punchable_wall" index="0"]
+position = Vector2( -1, 0 )
+shape = SubResource( 2 )

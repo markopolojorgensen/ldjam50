@@ -12,7 +12,7 @@ func _process(_delta):
 		$sprite.frame = 0
 
 func _unhandled_input(event):
-	if event.is_action_pressed("jump") and $player_proximity_detector.is_player_near():
+	if event.is_action_pressed("attack") and $player_proximity_detector.is_player_near():
 		if not activated:
 			activated = true
 			get_tree().set_input_as_handled()

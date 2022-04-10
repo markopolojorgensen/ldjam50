@@ -1,0 +1,53 @@
+[gd_resource type="AudioBusLayout" load_steps=6 format=2]
+
+[sub_resource type="AudioEffectLimiter" id=4]
+resource_name = "Limiter"
+
+[sub_resource type="AudioEffectCompressor" id=5]
+resource_name = "Compressor"
+threshold = -6.0
+release_ms = 1000.0
+sidechain = "Fanfares"
+
+[sub_resource type="AudioEffectCompressor" id=6]
+resource_name = "Compressor"
+threshold = -6.0
+sidechain = "Fanfares"
+
+[sub_resource type="AudioEffectCompressor" id=1]
+resource_name = "Compressor"
+threshold = -6.0
+
+[sub_resource type="AudioEffectLimiter" id=3]
+resource_name = "Limiter"
+
+[resource]
+bus/0/volume_db = -3.11736
+bus/0/effect/0/effect = SubResource( 4 )
+bus/0/effect/0/enabled = true
+bus/1/name = "Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -6.25101
+bus/1/send = "Master"
+bus/1/effect/0/effect = SubResource( 5 )
+bus/1/effect/0/enabled = true
+bus/2/name = "Effects"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -6.57885
+bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 6 )
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource( 1 )
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource( 3 )
+bus/2/effect/2/enabled = true
+bus/3/name = "Fanfares"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -3.11736
+bus/3/send = "Master"

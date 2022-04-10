@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/balloon_squeak.wav-f8d41ea4da8d2e66c49094fb67c9172c.sample"
+
+[deps]
+
+source_file="res://cycle/balloon_squeak.wav"
+dest_files=[ "res://.import/balloon_squeak.wav-f8d41ea4da8d2e66c49094fb67c9172c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

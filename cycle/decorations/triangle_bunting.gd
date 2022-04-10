@@ -21,10 +21,11 @@ func _ready():
 			var perp = baked_points[i+1] - baked_points[i-1]
 			# var normal = perp.rotated(PI/2)
 			sprite.rotation = perp.angle()
-		
-		
-		
-		
+
+
+
+
+
 
 
 

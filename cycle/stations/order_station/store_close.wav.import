@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/store_close.wav-edeab9cb4e6f231aa623b9d68e6bfb69.sample"
+
+[deps]
+
+source_file="res://cycle/stations/order_station/store_close.wav"
+dest_files=[ "res://.import/store_close.wav-edeab9cb4e6f231aa623b9d68e6bfb69.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

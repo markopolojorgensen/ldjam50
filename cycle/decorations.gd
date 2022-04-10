@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready():
+	show()
 	call_deferred("do_decorations")
 
 func do_decorations():
@@ -61,7 +62,10 @@ func do_decorations():
 					var adjusted_gpos_b = gpos_b
 					if "width" in decoration:
 						var offset = int(round(decoration.width / 2.0))
-						assert(decoration.width < abs(adjusted_gpos_a.x - adjusted_gpos_b.x))
+						var check = decoration.width < abs(adjusted_gpos_a.x - adjusted_gpos_b.x)
+						if not check:
+							print("%s: decoration %s too wide for distributor %s" % [name, decoration.name, distributor.name])
+							breakpoint
 						adjusted_gpos_a.x += offset
 						adjusted_gpos_b.x -= offset
 					assert(adjusted_gpos_a.x < adjusted_gpos_b.x)
@@ -85,4 +89,5 @@ func add_to_layer(distributor, layer):
 		print(property_name)
 		breakpoint
 	return result
+
 

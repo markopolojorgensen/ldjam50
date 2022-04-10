@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$tween.interpolate_property(self, \"position\", Vector2(100, 100), Vector2(500, 300), 5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	$tween.start()
+	
+	$timer.connect(\"timeout\", self, \"timeout\")
+
+func timeout():
+	$tween.seek(5)
+	$tween.queue_free()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="tween_test" type="Node2D"]
+
+[node name="sprite" type="Sprite" parent="."]
+position = Vector2( 83, 92 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="tween" type="Tween" parent="sprite"]
+
+[node name="timer" type="Timer" parent="sprite"]
+wait_time = 2.0
+one_shot = true
+autostart = true

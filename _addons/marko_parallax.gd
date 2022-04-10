@@ -75,7 +75,7 @@ func set_original_position(child, original_position):
 	child.position = original_position
 
 func _process(_delta):
-#	all_children_process()
+	# all_children_process()
 	if is_on_screen and active:
 		position_self()
 

@@ -8,11 +8,10 @@
 position = Vector2( 239, 210 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -48 )
-hframes = 8
+hframes = 6
 script = ExtResource( 2 )
 
 [node name="line_2d" type="Line2D" parent="."]
-z_index = -1
 width = 3.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 3 )

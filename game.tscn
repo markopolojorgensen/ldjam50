@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://logo_intro/logo_intro.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hud_theme.tres" type="Theme" id=3]
+[ext_resource path="res://on_the_clock.wav" type="AudioStream" id=4]
+[ext_resource path="res://safehouse.wav" type="AudioStream" id=5]
+[ext_resource path="res://cycle/hourglass_fanfare.wav" type="AudioStream" id=6]
+[ext_resource path="res://hourglass_fanfare.gd" type="Script" id=7]
+[ext_resource path="res://empty_rumble.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -49,7 +54,10 @@ tracks/1/keys = {
 }
 
 [node name="game" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
+start_muted = true
+unlock_all_decorations = true
 
 [node name="logo_intro" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -70,3 +78,27 @@ theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="on_the_clock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Music"
+
+[node name="safehouse" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Music"
+
+[node name="empty_rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Music"
+
+[node name="music_tween" type="Tween" parent="."]
+
+[node name="hourglass_fanfare" type="AudioStreamPlayer" parent="." groups=["hourglass_pickup_listeners"]]
+stream = ExtResource( 6 )
+volume_db = -3.0
+bus = "Fanfares"
+script = ExtResource( 7 )
+
+[node name="music_fade_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
