@@ -103,5 +103,5 @@ particle_type = "money"
 modulate = Color( 0.752941, 0.752941, 0.752941, 0.752941 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
-frame = 17
+frame = 11
 playing = true

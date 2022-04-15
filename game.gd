@@ -2,6 +2,8 @@ extends Node
 
 export(bool) var start_muted = false
 export(bool) var unlock_all_decorations = false
+export(bool) var invite_all_npcs = false
+export(bool) var super_time = false
 
 
 signal beat
@@ -51,9 +53,15 @@ func _ready():
 			"streamers",
 			"banners",
 			"disco balls",
-#			"",
-#			"",
 		]
+		get_tree().call_group("store_listeners", "bought_item")
+		
+		if invite_all_npcs:
+			for id in [0,1,2,3,4,5,6,7]:
+				global.invited_npcs.append(id)
+	
+	if super_time:
+		global.current_cycle.cycle_time += 6000
 	
 	call_deferred("leave_base")
 
@@ -110,7 +118,8 @@ func crossfade(to : AudioStreamPlayer):
 	# is there already a fade happening?
 	
 	if not to.playing:
-		to.play(30)
+		to.play()
+#		to.play(30)
 	bpm_track = to
 	update_beat_count(true)
 	

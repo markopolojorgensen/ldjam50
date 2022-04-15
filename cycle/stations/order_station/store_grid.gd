@@ -16,6 +16,7 @@ func _ready():
 		widget.set_textures(config.button_texture_normal, config.button_texture_highlighted, config.button_texture_disabled)
 		widget.set_item_name(config.store_item_name)
 		widget.set_cost(config.cost)
+		widget.set_description(config.description)
 		add_child(widget)
 
 func bought_item():

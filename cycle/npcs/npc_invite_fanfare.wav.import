@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/npc_invite_fanfare.wav-dd48a4db981d44c3bce56126ffe96b1b.sample"
+
+[deps]
+
+source_file="res://cycle/npcs/npc_invite_fanfare.wav"
+dest_files=[ "res://.import/npc_invite_fanfare.wav-dd48a4db981d44c3bce56126ffe96b1b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

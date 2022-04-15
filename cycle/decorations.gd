@@ -16,7 +16,7 @@ func do_decorations():
 			if not add_to_layer(distributor, layer):
 				continue
 			
-			weight = fmod(weight + 1.618, 1.0)
+			weight = increment_weight(weight)
 			var parallax_weight = clamp(((layer.parallax_scale - 0.8) / 0.4), 0, 1.0)
 			var position_adjustment := Vector2()
 			match distributor.orientation:
@@ -49,7 +49,7 @@ func do_decorations():
 #			print("  from %s to %s" % [str(gpos_a), str(gpos_b)])
 			assert(gpos_a.x < gpos_b.x)
 			for scene_count in scene_count_list:
-				weight = fmod(weight + 1.618, 1.0)
+				weight = increment_weight(weight)
 				if scene_count.only_extremes and not layer.parallax_scale in [0.8, 1.0, 1.2]:
 					continue
 				var decoration_count = scene_count.count
@@ -57,6 +57,8 @@ func do_decorations():
 					decoration_count = scene_count.back_count
 				for i in range(decoration_count):
 					var decoration = scene_count.decoration_scene.instance()
+					if "look_right" in decoration and (randf() < 0.5):
+						decoration.look_right = true
 #					print("    decoration %s" % decoration.name)
 					var adjusted_gpos_a = gpos_a
 					var adjusted_gpos_b = gpos_b
@@ -78,8 +80,11 @@ func do_decorations():
 						decoration.global_position = adjusted_gpos_a.linear_interpolate(adjusted_gpos_b, randomized_weight)
 					if layer.has_method("set_original_position"):
 						layer.set_original_position(decoration, decoration.position)
-					weight = fmod(weight + 1.618, 1.0)
+					weight = increment_weight(weight)
 
+func increment_weight(weight):
+	var random_component = rand_range(-0.1, 0.1)
+	return fmod(weight + 1.618 + random_component, 1.0)
 
 func add_to_layer(distributor, layer):
 #	print(layer.parallax_scale * 100)

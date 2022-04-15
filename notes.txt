@@ -1,10 +1,30 @@
 TODO
-  punchable walls
+  secrets should explode
+
+  "return here to replenish party time"
+  "X hourglasses found"
+  balloons shouldn't respawn, even if you lose a cycle
+  multiple tiers? balloons I, balloons II, etc?
+
+  double jump off the top of the pyramid to get to another safehouse?
+
+
+  npcs should say stuff
+    probably different things
+  npcs should move to the safehouse, probably when you meet them
+  do npcs do anything?
+    yeah, they give you advice & tell you about secrets
+  npcs move to every room you visit, assuming you've bought their item
+    otherwise, they stay where they started?
+
+
+
   level design ideas
-    king of the hill / pyramid scheme
     elevator shaft
     bunkers / series of pits
     suspension bridge / series of platforms hanging from the ceiling
+
+
 
   decoration refinement
     pyramid needs decorations
@@ -23,9 +43,31 @@ TODO
 
   NPCs
     DJ
+      "I'll come to the party once you get a decent soundsystem."
+      "My favorite Genre? Chillhop, of course."
+
     drunk relative
-    halloween mummy who loves streamers
     sentient party hat
+      "I'll come to the party once you buy some hats."
+      "You stay here, I'll go on a head."
+      "Yeah, I'm from Manhatten. What of it?"
+      "It's just a game, don't lose your head."
+      "Don't you dare try pulling a rabbit out of me!"
+      "I don't like boats. Too scared of cap sizing."
+    giant broken clock
+      "I'll come to the party once you buy some bunting."
+      "Why yes, I AM right twice a day."
+      "Gotta hand it to you, this party is a great time."
+      "Got a minute? No, I don't suppose you do."
+      "I had a nightmare I was in a painting once."
+    mummy
+      "I'll come to the party once you buy some streamers."
+      "You can trust me. I keep everything under wraps."
+      "Thanks for throwing the party, it's been fun to unwind."
+      "People say I'm all wrapped up in myself, but they just don't see past my outer layers."
+      "You might think I like wrap music, but I'm more into future bass."
+      "This is really turning out to be a long party; better wrap it up before my wife gets home."
+
 
 
   get_world() -> things need to spawn stuff in the room, since that's what gets unloaded
@@ -53,20 +95,7 @@ TODO
     stamina / sprint ability
 
 
-"do you have x? I'll come to your party if you have x."
-friends only join the party if you have what they like (and if you have met them)
-spend money to buy decorations (makes decorations appear and friends will move to the party)
-the more friends you have at the party the more time you have?
-  music
-  floor balloons
-  balloon bundles
-  party hats
-  streamers
-  round bunting
-  triangular bunting
-  disco balls
-  speaker stacks
-  rafters
+
 
 
 
@@ -94,13 +123,63 @@ art ideas
     cups w/ ice
     crazy straws
   
-  disco ball?
-
   party hats
     stereotypical cone hat
     tie around your head
     paper crown
 
+
+
+store config
+  music
+  balloons
+  bundles
+  hats
+  bunting
+  streamers
+  banners
+  disco balls
+
+rooms
+  safehouse
+  pyramid
+  maze
+  rafters
+  mountains
+  sky_disco
+  dont_look_down - streamers npc
+
+
+
+
+
+room process
+  rough layout
+  pois
+    punchable balloons
+    hourglasses
+    piggy banks
+
+  secrets
+    fake walls
+    fake floors
+  non-invited npcs
+  invited npcs
+
+  decorations
+    floors (v-locked)
+      balloons
+      bundles
+      hats
+      speaker stacks
+    ceilings (v-locked)
+      streamers
+      bunting
+      banners
+      boards
+    non-v-locked decorations
+      far foreground
+      disco balls
 
 
 
@@ -122,6 +201,10 @@ piggy banks
 
 
 DONE
+  npc conditional dialogue
+  halloween mummy who loves streamers
+  pyramid scheme first pass
+  punchable walls
   show end screen after numbers go crazy
   sign that says "big disco in the sky ^"
   balloons keep themselves reachable

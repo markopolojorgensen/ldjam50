@@ -16,7 +16,7 @@ func _process(_delta):
 		$sprite.frame = 0
 
 func _unhandled_input(event):
-	if event.is_action_pressed("attack") and $player_proximity_detector.is_player_near() and not is_active:
+	if event.is_action_pressed("cycle_talk") and $player_proximity_detector.is_player_near() and not is_active:
 		is_active = true
 		get_tree().set_input_as_handled()
 		hud.pause_mode = PAUSE_MODE_PROCESS

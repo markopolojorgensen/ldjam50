@@ -4,7 +4,7 @@ extends Node
 signal cycle_ended
 
 # time remaining in the current cycle
-var cycle_time = 120
+var cycle_time = 30
 var is_cycle_ended = false
 var countdown_active = true
 var time_recovery_rate_slow = 2

@@ -5,8 +5,8 @@ export(String, "time", "money") var particle_type = "time"
 var destination
 
 var velocity := Vector2()
-var acceleration = 500
-var speed = 400
+var acceleration = 600
+var speed = 500
 
 func _ready():
 	var starting_frame = (randi() % 10) * 18

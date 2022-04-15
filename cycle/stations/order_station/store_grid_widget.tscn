@@ -15,9 +15,8 @@ __meta__ = {
 }
 
 [node name="item_name" type="Label" parent="."]
-margin_top = 37.0
 margin_right = 64.0
-margin_bottom = 51.0
+margin_bottom = 14.0
 custom_colors/font_color = Color( 0.623529, 0.815686, 0.498039, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0.0470588, 0.0196078, 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -28,13 +27,26 @@ __meta__ = {
 }
 
 [node name="cost" type="Label" parent="."]
-margin_top = 47.0
+margin_top = 10.0
 margin_right = 64.0
-margin_bottom = 61.0
+margin_bottom = 24.0
 custom_colors/font_color = Color( 0.623529, 0.815686, 0.498039, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0.0470588, 0.0196078, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "4$"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="effect" type="Label" parent="."]
+margin_top = 46.0
+margin_right = 64.0
+margin_bottom = 59.0
+custom_colors/font_color = Color( 0.623529, 0.815686, 0.498039, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0.0470588, 0.0196078, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Speed +10%"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

@@ -57,7 +57,6 @@ tracks/1/keys = {
 pause_mode = 2
 script = ExtResource( 1 )
 start_muted = true
-unlock_all_decorations = true
 
 [node name="logo_intro" parent="." instance=ExtResource( 2 )]
 visible = false

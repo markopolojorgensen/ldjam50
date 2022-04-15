@@ -1,0 +1,132 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://cycle/npcs/npc.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cycle/npcs/generic_npc.gd" type="Script" id=2]
+[ext_resource path="res://cycle/npcs/basic_npcs.png" type="Texture" id=3]
+[ext_resource path="res://cycle/npcs/npc_invite_fanfare.wav" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("teleport_sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "squash"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1.2, 0.8 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "stretch"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "teleport"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.15, 0.23, 0.29, 0.35, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0, 1.2 ), Vector2( -1, 1 ), Vector2( 0, 1.2 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.2, 0.8 ), Vector2( 0, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("teleport_sfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="generic_npc" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+offset = Vector2( 0, -32 )
+hframes = 4
+vframes = 4
+
+[node name="player_proximity_detector" parent="." index="2"]
+visible = false
+
+[node name="dialogue_label" parent="z_index/margin_container/margin_container" index="0"]
+bbcode_text = "[center]T H E  P A R T Y  
+M U S T  G O  O N.[/center]"
+text = "T H E  P A R T Y  
+M U S T  G O  O N."
+
+[node name="sprite_animation_player" type="AnimationPlayer" parent="." index="6"]
+anims/RESET = SubResource( 2 )
+anims/squash = SubResource( 1 )
+anims/stretch = SubResource( 3 )
+anims/teleport = SubResource( 4 )
+
+[node name="teleport_timer" type="Timer" parent="." index="7"]
+wait_time = 5.0
+one_shot = true
+
+[node name="teleport_sfx" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource( 4 )
+volume_db = -3.0
+bus = "Fanfares"
+
+[node name="coin_spawn_position" type="Position2D" parent="." index="9"]
+position = Vector2( 0, -26 )

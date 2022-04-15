@@ -1,10 +1,14 @@
 extends RigidBody2D
 
-const max_speed = 300
+
+const max_speed_fundamental = 270
+var max_speed = max_speed_fundamental
 const max_acceleration = 2000
 
 const initial_jump_magnitude = 500
-const continuous_jump_magnitude = 350
+var do_jump = false
+const continuous_jump_magnitude_fundamental = 350
+var continuous_jump_magnitude = continuous_jump_magnitude_fundamental
 
 var attack_animation = null
 var previous_attack_animation = "attack_c"
@@ -13,6 +17,8 @@ const paunch_scene = preload("one_paunch/paunch.tscn")
 
 var wants_to_jump = false
 var touching_ground = false
+var double_jump_enabled = false # store purchase
+var double_jump_available = false # actually used in integrate forces
 
 var gravity_multiplier = 1.0
 onready var og_gravity = gravity_scale
@@ -21,8 +27,41 @@ func _enter_tree():
 	global.current_player = self
 
 func _ready():
+	add_to_group("store_listeners")
 	global.music.connect("beat", self, "beat")
 	$animated_sprite.play("jump_loop")
+
+# update stats
+func bought_item():
+	var speed_multiplier = 1.0
+	var jump_multiplier = 1.0
+	$coin_magnet.active = false
+	for item in global.items_purchased:
+		match item:
+			"music":
+				speed_multiplier += 0.1
+			"balloons":
+				jump_multiplier += 0.2
+			"bundles":
+				jump_multiplier += 0.3
+			"hats":
+				speed_multiplier += 0.1
+				jump_multiplier += 0.1
+			"bunting":
+				speed_multiplier += 0.1
+			"streamers":
+				$coin_magnet.active = true
+			"banners":
+				speed_multiplier += 0.3
+			"disco balls":
+				double_jump_enabled = true
+			_:
+				print("player: unrecognized purchase: %s" % item)
+	
+	max_speed = max_speed_fundamental * speed_multiplier
+#	print("new max speed: %.1f instead of %.1f" % [max_speed, max_speed_fundamental])
+	continuous_jump_magnitude = continuous_jump_magnitude_fundamental * jump_multiplier
+#	print("new jump mag: %.1f instaed of %.1f" % [continuous_jump_magnitude, continuous_jump_magnitude_fundamental])
 
 func _process(_delta):
 	var intended_direction = $intended_direction.get_intended_direction()
@@ -65,8 +104,12 @@ func beat():
 		$animated_sprite.frame = 0
 
 func update_sprite_speed_scale():
+	var scale_weight = (max_speed - max_speed_fundamental) / (430.0 - max_speed_fundamental)
+	scale_weight = clamp(scale_weight, 0, 1)
+	var max_scale = lerp(1.5, 3, scale_weight)
 	var speed_weight = clamp(abs(linear_velocity.x) / max_speed, 0, 1)
-	$animated_sprite.speed_scale = lerp(0.5, 2.5, speed_weight)
+	$animated_sprite.speed_scale = lerp(0.5, max_scale, speed_weight)
+#	$label.text = "scale: %.1f / %.1f" % [$animated_sprite.speed_scale, max_scale]
 
 func _integrate_forces(state):
 	# just stopped touching the ground
@@ -75,6 +118,7 @@ func _integrate_forces(state):
 	
 	# just started touching the ground
 	if not touching_ground and $ground_detector.is_colliding():
+		double_jump_available = true
 		$footstep_sfx.play()
 		if wants_to_jump and 0 <= state.linear_velocity.y:
 			start_jump()
@@ -99,10 +143,6 @@ func _integrate_forces(state):
 	if 0.1 < intended_direction.y:
 		apply_central_impulse(Vector2.DOWN * state.step * continuous_jump_magnitude * 0.5)
 	
-	if max_speed < state.linear_velocity.length():
-		pass
-		# TODO: slow down
-	
 	if wants_to_jump:
 		apply_central_impulse(Vector2(0, -continuous_jump_magnitude) * state.step)
 	
@@ -115,11 +155,16 @@ func _integrate_forces(state):
 func start_jump():
 	if $jump_cooldown.is_stopped():
 		$jump_cooldown.start()
-		apply_central_impulse(Vector2(0, -initial_jump_magnitude))
+		if double_jump_available:
+			# regular jump
+			apply_central_impulse(Vector2(0, -initial_jump_magnitude))
+		else:
+			# double jump in mid air, go big mode
+			var adjustment = clamp(-1 * linear_velocity.y, -INF, 0)
+			apply_central_impulse(Vector2(0, -initial_jump_magnitude + adjustment))
 		$animated_sprite.play("jump_start")
 		$jump_sfx.pitch_scale = rand_range(0.9, 1.1)
 		$jump_sfx.play()
-
 
 func _unhandled_input(event):
 	if event.is_action_pressed("jump"):
@@ -127,14 +172,17 @@ func _unhandled_input(event):
 		wants_to_jump = true
 		if (touching_ground or not $coyote_time.is_stopped()) and 0 <= linear_velocity.y:
 			start_jump()
+		elif double_jump_enabled and double_jump_available:
+			double_jump_available = false
+			start_jump()
 	elif event.is_action_released("jump"):
 		get_tree().set_input_as_handled()
 		wants_to_jump = false
 		if linear_velocity.y < 0:
 			apply_central_impulse(Vector2(0, linear_velocity.y * -0.9))
 	elif event.is_action_pressed("attack") and $attack_duration.is_stopped() and $attack_cooldown.is_stopped():
-		# attack triggers buttons, don't set as handled
-#		get_tree().set_input_as_handled()
+		# attack no longer triggers buttons, don't set as handled
+		get_tree().set_input_as_handled()
 		attack_animation = global.pick_random_from_list(["attack_a", "attack_b", "attack_c"])
 		while attack_animation == previous_attack_animation:
 			attack_animation = global.pick_random_from_list(["attack_a", "attack_b", "attack_c"])

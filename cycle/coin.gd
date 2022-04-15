@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Coin
 
 const money_particle_scene = preload("hud/money_particle.tscn")
 const kaching_sfx_scene = preload("coin_kaching_sfx.tscn")
@@ -29,3 +30,9 @@ func _on_coin_body_entered(_body):
 func _on_iframes_timeout():
 	for body in $pickup.get_overlapping_bodies():
 		_on_pickup_body_entered(body)
+
+func slipperoni():
+	physics_material_override.friction = 0
+
+func double_slipperoni():
+	collision_mask = 0

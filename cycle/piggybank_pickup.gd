@@ -11,10 +11,11 @@ func _ready():
 
 func _on_pickup_body_entered(_body):
 	if not id in global.piggybank_pickups_acquired:
+#		print("piggybank pickup %s %d acquired" % [name, id])
 		global.piggybank_pickups_acquired.append(id)
 		call_deferred("picked_up")
 	else:
-		print("pickup %s %d already acquired?!" % [name, id])
+		print("piggybank pickup %s %d already acquired?!" % [name, id])
 	queue_free()
 
 func picked_up():

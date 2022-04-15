@@ -40,4 +40,6 @@ func set_cost(new_cost):
 	cost = new_cost
 	$cost.text = "%s$" % str(new_cost)
 
+func set_description(new_description):
+	$effect.text = new_description
 

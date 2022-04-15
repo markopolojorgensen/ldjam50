@@ -3,6 +3,15 @@ extends NPC
 var beat_count = 0
 var left = true
 
+var hint_phrase = "I'll come to the party once you buy some streamers."
+var phrases = [
+	"You can trust me. I keep everything under wraps.",
+	"Thanks for throwing the party, it's been fun to unwind.",
+	"People say I'm all wrapped up in myself, but they just don't see past my outer layers.",
+	"You might think I like wrap music, but I'm more into future bass.",
+]
+var phrase_index = 0
+
 func beat():
 	.beat()
 	
@@ -22,9 +31,15 @@ func beat():
 	beat_count = (beat_count + 1) % 8
 	
 	if left:
-		$sprite.frame = 0
+		if $player_proximity_detector.is_player_near():
+			$sprite.frame = 4
+		else:
+			$sprite.frame = 0
 	else:
-		$sprite.frame = 2
+		if $player_proximity_detector.is_player_near():
+			$sprite.frame = 6
+		else:
+			$sprite.frame = 2
 
 func _on_half_beat_interval_timeout():
 	var flip = false
@@ -32,6 +47,21 @@ func _on_half_beat_interval_timeout():
 		flip = true
 	
 	if (left and not flip) or (not left and flip):
-		$sprite.frame = 1
+		if $player_proximity_detector.is_player_near():
+			$sprite.frame = 5
+		else:
+			$sprite.frame = 1
 	else:
-		$sprite.frame = 3
+		if $player_proximity_detector.is_player_near():
+			$sprite.frame = 7
+		else:
+			$sprite.frame = 3
+
+func activate():
+	.activate()
+	if not is_showing_dialogue():
+		show_dialogue(phrases[phrase_index])
+		phrase_index = (phrase_index + 1) % phrases.size()
+	else:
+		hide_dialogue()
+
