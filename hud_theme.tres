@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://m3x6.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ninepatch.png" type="Texture" id=2]
@@ -8,6 +8,14 @@
 
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 4.0
+margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_left = 4.0
 margin_right = 4.0
@@ -59,6 +67,7 @@ Button/colors/font_color = Color( 0.168627, 0.517647, 0.0980392, 1 )
 Button/colors/font_color_disabled = Color( 0.0352941, 0.364706, 0.027451, 1 )
 Button/colors/font_color_focus = Color( 0.313726, 0.631373, 0.2, 1 )
 Button/styles/focus = SubResource( 5 )
+Button/styles/hover = SubResource( 8 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = SubResource( 6 )
 HSeparator/styles/separator = SubResource( 3 )

@@ -3,7 +3,8 @@ extends Area2D
 var spawned = false
 
 func _ready():
-	connect("body_entered", self, "_on_spawn_trigger_body_entered")
+	pass
+	# connect("body_entered", self, "_on_spawn_trigger_body_entered")
 
 func _on_spawn_trigger_body_entered(_body):
 #	var spawn_count = 0
@@ -19,3 +20,15 @@ func _on_spawn_trigger_body_entered(_body):
 #				reset_count += 1
 #	print("%d spawners spawned, %d spawners reset" % [spawn_count, reset_count])
 	spawned = true
+
+
+
+
+
+
+
+
+
+
+
+

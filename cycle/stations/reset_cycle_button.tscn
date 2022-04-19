@@ -32,7 +32,7 @@ script = ExtResource( 6 )
 margin_left = -21.0
 margin_top = 11.0
 margin_right = 21.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 theme = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,7 +40,7 @@ __meta__ = {
 
 [node name="nine_patch_rect" type="NinePatchRect" parent="z_index/margin_container"]
 margin_right = 42.0
-margin_bottom = 31.0
+margin_bottom = 30.0
 texture = ExtResource( 5 )
 patch_margin_left = 3
 patch_margin_top = 3
@@ -49,29 +49,35 @@ patch_margin_bottom = 3
 
 [node name="margin_container" type="MarginContainer" parent="z_index/margin_container"]
 margin_right = 42.0
-margin_bottom = 31.0
+margin_bottom = 30.0
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
 
 [node name="v_box_container" type="VBoxContainer" parent="z_index/margin_container/margin_container"]
-margin_right = 42.0
-margin_bottom = 31.0
-custom_constants/separation = -4
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 39.0
+margin_bottom = 27.0
+custom_constants/separation = 0
 
 [node name="label" type="Label" parent="z_index/margin_container/margin_container/v_box_container"]
-margin_right = 42.0
-margin_bottom = 13.0
-text = "Reset"
+margin_right = 36.0
+margin_bottom = 8.0
+text = "Start"
 align = 1
 
 [node name="label2" type="Label" parent="z_index/margin_container/margin_container/v_box_container"]
-margin_top = 9.0
-margin_right = 42.0
-margin_bottom = 22.0
+margin_top = 8.0
+margin_right = 36.0
+margin_bottom = 16.0
 text = "The"
 align = 1
 
 [node name="label3" type="Label" parent="z_index/margin_container/margin_container/v_box_container"]
-margin_top = 18.0
-margin_right = 42.0
-margin_bottom = 31.0
+margin_top = 16.0
+margin_right = 36.0
+margin_bottom = 24.0
 text = "Party"
 align = 1

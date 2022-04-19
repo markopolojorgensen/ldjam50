@@ -40,6 +40,7 @@ func _process(delta):
 				get_tree().call_group("time_ding", "play")
 			"money":
 				global.currency += 0.1
+				get_tree().call_group("currency_listeners", "add_currency", 0.1)
 				get_tree().call_group("coin_ding", "play")
 		queue_free()
 	var desired_velocity = here_to_there.normalized() * speed

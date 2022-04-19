@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://cycle/stations/order_station/order_station.png" type="Texture" id=1]
 [ext_resource path="res://cycle/stations/order_station/order_station.gd" type="Script" id=2]
@@ -39,6 +39,10 @@
 [ext_resource path="res://cycle/stations/order_station/store_buttons_highlighted_07.png" type="Texture" id=37]
 [ext_resource path="res://cycle/stations/player_distance_fade.gd" type="Script" id=38]
 [ext_resource path="res://ninepatch.png" type="Texture" id=39]
+[ext_resource path="res://cycle/stations/order_station/store_buttons_purchased_08.png" type="Texture" id=40]
+[ext_resource path="res://cycle/stations/order_station/store_buttons_08.png" type="Texture" id=41]
+[ext_resource path="res://cycle/stations/order_station/store_buttons_highlighted_08.png" type="Texture" id=42]
+[ext_resource path="res://font_w_outline.tres" type="DynamicFont" id=43]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 35, 31.5 )
@@ -109,7 +113,7 @@ margin_left = 6.0
 margin_top = 6.0
 margin_right = 699.0
 margin_bottom = 395.0
-custom_constants/separation = -1
+custom_constants/separation = 1
 
 [node name="label" type="Label" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container"]
 margin_right = 693.0
@@ -119,21 +123,22 @@ text = "Aftermarket Party Supplies"
 align = 1
 
 [node name="label2" type="Label" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container"]
-margin_top = 25.0
+margin_top = 27.0
 margin_right = 693.0
-margin_bottom = 33.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 43 )
 text = "\"We cater to your every need\""
 align = 1
 
 [node name="h_separator" type="HSeparator" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container"]
-margin_top = 32.0
+margin_top = 41.0
 margin_right = 693.0
-margin_bottom = 36.0
+margin_bottom = 45.0
 
 [node name="margin_container" type="MarginContainer" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container"]
-margin_top = 35.0
+margin_top = 46.0
 margin_right = 693.0
-margin_bottom = 374.0
+margin_bottom = 356.0
 size_flags_vertical = 3
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
@@ -144,17 +149,73 @@ custom_constants/margin_bottom = 8
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 685.0
-margin_bottom = 331.0
+margin_bottom = 302.0
 
 [node name="store_grid" type="GridContainer" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container"]
-margin_left = 34.0
-margin_top = 61.0
-margin_right = 642.0
-margin_bottom = 261.0
-columns = 9
+margin_left = 66.0
+margin_top = 51.0
+margin_right = 610.0
+margin_bottom = 243.0
+custom_constants/vseparation = 64
+custom_constants/hseparation = 32
+columns = 6
 script = ExtResource( 13 )
 
 [node name="configuration" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid"]
+
+[node name="widget_config9" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Hourglass I"
+cost = 10
+button_texture_normal = ExtResource( 41 )
+button_texture_highlighted = ExtResource( 42 )
+button_texture_disabled = ExtResource( 40 )
+description = "+10 seconds"
+
+[node name="widget_config10" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Hourglass II"
+cost = 15
+button_texture_normal = ExtResource( 41 )
+button_texture_highlighted = ExtResource( 42 )
+button_texture_disabled = ExtResource( 40 )
+description = "+10 seconds"
+
+[node name="widget_config11" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Hourglass III"
+cost = 20
+button_texture_normal = ExtResource( 41 )
+button_texture_highlighted = ExtResource( 42 )
+button_texture_disabled = ExtResource( 40 )
+description = "+10 seconds"
+
+[node name="widget_config12" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Hourglass IV"
+cost = 25
+button_texture_normal = ExtResource( 41 )
+button_texture_highlighted = ExtResource( 42 )
+button_texture_disabled = ExtResource( 40 )
+description = "+10 seconds"
+
+[node name="widget_config5" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Streamers"
+cost = 25
+button_texture_normal = ExtResource( 19 )
+button_texture_highlighted = ExtResource( 16 )
+button_texture_disabled = ExtResource( 23 )
+description = "Coin Magnet"
+
+[node name="widget_config8" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
+script = ExtResource( 15 )
+store_item_name = "Disco Balls"
+cost = 35
+button_texture_normal = ExtResource( 35 )
+button_texture_highlighted = ExtResource( 37 )
+button_texture_disabled = ExtResource( 36 )
+description = "double jump"
 
 [node name="widget_config6" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
 script = ExtResource( 15 )
@@ -200,15 +261,6 @@ button_texture_highlighted = ExtResource( 22 )
 button_texture_disabled = ExtResource( 26 )
 description = "Speed +10%"
 
-[node name="widget_config5" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
-script = ExtResource( 15 )
-store_item_name = "Streamers"
-cost = 25
-button_texture_normal = ExtResource( 19 )
-button_texture_highlighted = ExtResource( 16 )
-button_texture_disabled = ExtResource( 23 )
-description = "Coin Magnet"
-
 [node name="widget_config7" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
 script = ExtResource( 15 )
 store_item_name = "Banners"
@@ -218,157 +270,69 @@ button_texture_highlighted = ExtResource( 28 )
 button_texture_disabled = ExtResource( 29 )
 description = "Speed +30%"
 
-[node name="widget_config8" type="Node" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid/configuration"]
-script = ExtResource( 15 )
-store_item_name = "Disco Balls"
-cost = 35
-button_texture_normal = ExtResource( 35 )
-button_texture_highlighted = ExtResource( 37 )
-button_texture_disabled = ExtResource( 36 )
-description = "double jump"
-
 [node name="store_grid_widget" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
 
 [node name="store_grid_widget2" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 68.0
-margin_right = 132.0
+margin_left = 96.0
+margin_right = 160.0
 
 [node name="store_grid_widget3" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 136.0
-margin_right = 200.0
+margin_left = 192.0
+margin_right = 256.0
 
 [node name="store_grid_widget4" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 204.0
-margin_right = 268.0
+margin_left = 288.0
+margin_right = 352.0
 
 [node name="store_grid_widget5" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 272.0
-margin_right = 336.0
+margin_left = 384.0
+margin_right = 448.0
 
 [node name="store_grid_widget6" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 340.0
-margin_right = 404.0
+margin_left = 480.0
+margin_right = 544.0
 
 [node name="store_grid_widget7" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 408.0
-margin_right = 472.0
+margin_top = 128.0
+margin_bottom = 192.0
 
 [node name="store_grid_widget8" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 476.0
-margin_right = 540.0
+margin_left = 96.0
+margin_top = 128.0
+margin_right = 160.0
+margin_bottom = 192.0
 
 [node name="store_grid_widget9" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 544.0
-margin_right = 608.0
+margin_left = 192.0
+margin_top = 128.0
+margin_right = 256.0
+margin_bottom = 192.0
 
 [node name="store_grid_widget10" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_top = 68.0
-margin_bottom = 132.0
+margin_left = 288.0
+margin_top = 128.0
+margin_right = 352.0
+margin_bottom = 192.0
 
 [node name="store_grid_widget11" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 68.0
-margin_top = 68.0
-margin_right = 132.0
-margin_bottom = 132.0
+margin_left = 384.0
+margin_top = 128.0
+margin_right = 448.0
+margin_bottom = 192.0
 
 [node name="store_grid_widget12" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 136.0
-margin_top = 68.0
-margin_right = 200.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget13" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 204.0
-margin_top = 68.0
-margin_right = 268.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget14" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 272.0
-margin_top = 68.0
-margin_right = 336.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget15" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 340.0
-margin_top = 68.0
-margin_right = 404.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget16" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 408.0
-margin_top = 68.0
-margin_right = 472.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget17" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 476.0
-margin_top = 68.0
-margin_right = 540.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget18" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 544.0
-margin_top = 68.0
-margin_right = 608.0
-margin_bottom = 132.0
-
-[node name="store_grid_widget19" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_top = 136.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget20" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 68.0
-margin_top = 136.0
-margin_right = 132.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget21" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 136.0
-margin_top = 136.0
-margin_right = 200.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget22" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 204.0
-margin_top = 136.0
-margin_right = 268.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget23" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 272.0
-margin_top = 136.0
-margin_right = 336.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget24" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 340.0
-margin_top = 136.0
-margin_right = 404.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget25" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 408.0
-margin_top = 136.0
-margin_right = 472.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget26" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 476.0
-margin_top = 136.0
-margin_right = 540.0
-margin_bottom = 200.0
-
-[node name="store_grid_widget27" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container/margin_container/center_container/store_grid" instance=ExtResource( 7 )]
-margin_left = 544.0
-margin_top = 136.0
-margin_right = 608.0
-margin_bottom = 200.0
+margin_left = 480.0
+margin_top = 128.0
+margin_right = 544.0
+margin_bottom = 192.0
 
 [node name="back_button" type="Button" parent="store_hud_layer/order_station_hud/margin_container/margin_container/v_box_container"]
-margin_top = 373.0
-margin_right = 693.0
+margin_left = 90.0
+margin_top = 357.0
+margin_right = 602.0
 margin_bottom = 389.0
+rect_min_size = Vector2( 512, 32 )
+size_flags_horizontal = 4
 text = "Back to the party"
 script = ExtResource( 31 )
 

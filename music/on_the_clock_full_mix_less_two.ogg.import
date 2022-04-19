@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/on_the_clock_full_mix_less_two.ogg-116fa824c83c25c7f14eb4300d2891f9.oggstr"
+
+[deps]
+
+source_file="res://music/on_the_clock_full_mix_less_two.ogg"
+dest_files=[ "res://.import/on_the_clock_full_mix_less_two.ogg-116fa824c83c25c7f14eb4300d2891f9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

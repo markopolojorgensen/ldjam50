@@ -40,7 +40,7 @@ custom_constants/separation = -6
 
 [node name="label" type="Label" parent="margin_container/v_box_container"]
 margin_right = 84.0
-margin_bottom = 13.0
+margin_bottom = 8.0
 text = "Time until party ends"
 align = 1
 __meta__ = {
@@ -48,9 +48,9 @@ __meta__ = {
 }
 
 [node name="countdown_label" type="Label" parent="margin_container/v_box_container"]
-margin_top = 7.0
+margin_top = 2.0
 margin_right = 84.0
-margin_bottom = 33.0
+margin_bottom = 28.0
 custom_fonts/font = ExtResource( 5 )
 text = "00:00"
 align = 1

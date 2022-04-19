@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://cycle/player/fleeing_player.gd" type="Script" id=1]
+[ext_resource path="res://cycle/player/flee.wav" type="AudioStream" id=2]
+
+[sub_resource type="PhysicsMaterial" id=11]
+friction = 0.0
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("path_2d/path_follow_2d/particles_2d:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -106, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("path_2d/path_follow_2d:unit_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "circle"
+length = 0.25
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("path_2d/path_follow_2d:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "test"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("path_2d/path_follow_2d/particles_2d:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15, 386 ), Vector2( 659, 43 ) ]
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( 10.2646, -0.471937, -10.2646, 0.471937, 0, -10, -0.112085, -3.7755, 0.112085, 3.7755, -10, 1, -7.90495, 0.117984, 7.90495, -0.117984, -1, 9, 0.235969, 5.30929, -0.235969, -5.30929, 9, 0, 9.55673, -0.235969, -9.55673, 0.235969, 0, -10 )
+}
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.313726, 0.631373, 0.2, 1, 0, 0.0470588, 0.0196078, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 4
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, -2.10511, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 8.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="CircleShape2D" id=10]
+
+[node name="fleeing_player" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 0
+physics_material_override = SubResource( 11 )
+gravity_scale = 0.0
+continuous_cd = 2
+can_sleep = false
+script = ExtResource( 1 )
+
+[node name="animation_player" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/circle = SubResource( 9 )
+anims/test = SubResource( 7 )
+
+[node name="path_2d" type="Path2D" parent="."]
+position = Vector2( 0.0111195, 0 )
+scale = Vector2( 0.998765, 1 )
+curve = SubResource( 8 )
+
+[node name="path_follow_2d" type="PathFollow2D" parent="path_2d"]
+position = Vector2( 0, -10 )
+rotate = false
+
+[node name="particles_2d" type="Particles2D" parent="path_2d/path_follow_2d"]
+position = Vector2( -106, 1 )
+scale = Vector2( 1.00124, 1 )
+emitting = false
+amount = 64
+local_coords = false
+process_material = SubResource( 1 )
+
+[node name="collision_shape_2d" type="CollisionShape2D" parent="."]
+shape = SubResource( 10 )
+
+[node name="audio_stream_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -3.0
+autoplay = true
+bus = "Effects"

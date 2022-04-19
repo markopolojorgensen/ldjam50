@@ -43,6 +43,8 @@ var game
 
 var has_won = false
 
+var current_safehouse = "left"
+
 func _process(delta):
 	for npc_id in chip_in_timers.keys():
 		chip_in_timers[npc_id] = clamp(chip_in_timers[npc_id] - delta, 0, INF)

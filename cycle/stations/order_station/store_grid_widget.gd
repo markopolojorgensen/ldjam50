@@ -20,11 +20,13 @@ func focus_entered():
 	$focus_sfx.play()
 
 func pressed():
+	global.currency = stepify(global.currency, 0.1)
 	if cost <= global.currency and not disabled:
 		global.currency -= cost
 		global.buy_item(item_name)
 		get_tree().call_group("store_listeners", "bought_item")
 	elif not disabled and global.currency < cost:
+		print("global currency (%f) < cost (%d)" % [global.currency, cost])
 		get_tree().call_group("store_listeners", "cant_afford_it")
 
 func set_textures(normal, highlight, bought):

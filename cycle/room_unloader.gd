@@ -21,7 +21,7 @@ func do_load():
 
 func actually_do_load():
 	if not has_node("room"):
-		# print("%s adding room to tree" % name)
+#		print("%s adding room to tree" % name)
 		add_child(room)
 		room.position = Vector2()
 
@@ -30,6 +30,6 @@ func do_unload():
 
 func actually_do_unload():
 	if has_node("room"):
-		# print("%s removing room from tree" % name)
+#		print("%s removing room from tree" % name)
 		remove_child(room)
 

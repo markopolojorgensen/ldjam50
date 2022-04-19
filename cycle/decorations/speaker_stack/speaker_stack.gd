@@ -4,6 +4,8 @@ export(bool) var look_right = false
 
 var beat_counter = 0
 
+var width = 32
+
 func _ready():
 	global.music.connect("beat", self, "beat")
 	if look_right:

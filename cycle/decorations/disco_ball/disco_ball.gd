@@ -1,9 +1,15 @@
 extends AnimatedSprite
 
+export(bool) var always_there = false
+
 # 120 frames, 60 fps -> 1 pulse every 2 seconds
 var pulses_per_second = 0.75
 
 onready var game = find_parent("game")
+
+func _enter_tree():
+	if always_there and has_node("decoration_purchase_checker"):
+		$decoration_purchase_checker.queue_free()
 
 func _ready():
 	play()
@@ -11,6 +17,9 @@ func _ready():
 	$glow2.play()
 	$glow3.play()
 	game.connect("beat", self, "beat")
+	
+	if always_there:
+		show()
 
 func beat():
 	$glow.frame = 0

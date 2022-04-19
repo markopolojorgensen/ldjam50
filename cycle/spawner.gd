@@ -4,6 +4,9 @@ export(PackedScene) var scene
 export(bool) var return_to_spawn_point = true
 var spawned_thing
 
+onready var room = find_parent("room")
+export(String) var balloon_swarm_key
+
 func reset():
 	if not return_to_spawn_point:
 		return
@@ -27,5 +30,8 @@ func reset():
 # remember to call_deferred
 func spawn():
 	spawned_thing = scene.instance()
-	global.current_cycle.get_world().add_child(spawned_thing)
+	if balloon_swarm_key != null and balloon_swarm_key != "" and "balloon_swarm" in spawned_thing and room.has_method("get_balloon_swarm"):
+#		print("setting balloon swarm")
+		spawned_thing.balloon_swarm = room.get_balloon_swarm(balloon_swarm_key) 
+	room.add_child(spawned_thing)
 	spawned_thing.global_position = global_position

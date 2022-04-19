@@ -1,17 +1,11 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://logo_intro/grey_logo_intro_frames.png" type="Texture" id=1]
 [ext_resource path="res://logo_intro/logo_intro.gd" type="Script" id=2]
 [ext_resource path="res://logo_intro/2022-04-01 logo sfx.wav" type="AudioStream" id=3]
-[ext_resource path="res://ninepatch.png" type="Texture" id=4]
 
-[sub_resource type="StyleBoxTexture" id=93]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 9, 9 )
-margin_left = 2.0
-margin_right = 2.0
-margin_top = 2.0
-margin_bottom = 2.0
+[sub_resource type="StyleBoxFlat" id=93]
+bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -457,17 +451,15 @@ __meta__ = {
 }
 
 [node name="center_container" type="CenterContainer" parent="."]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 718.0
-margin_bottom = 403.0
+margin_right = 720.0
+margin_bottom = 405.0
 mouse_filter = 2
 
 [node name="control" type="Control" parent="center_container"]
-margin_left = 358.0
-margin_top = 200.0
-margin_right = 358.0
-margin_bottom = 200.0
+margin_left = 360.0
+margin_top = 202.0
+margin_right = 360.0
+margin_bottom = 202.0
 mouse_filter = 2
 
 [node name="animated_sprite" type="AnimatedSprite" parent="center_container/control"]

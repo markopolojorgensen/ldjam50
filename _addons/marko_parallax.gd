@@ -31,7 +31,11 @@ extends Node2D
 export(float) var parallax_scale = 1.0
 export(float) var parallax_scale_v = -1
 
+export(bool) var use_visibility_notifier = false
+export(bool) var hifi_all_children_mode = false
+
 export(bool) var debug = false
+var debug_label
 
 var camera : Camera2D
 # original positions of children
@@ -47,6 +51,17 @@ export(bool) var auto_modulate = true
 
 # set by visibility_notifier
 var is_on_screen = false
+
+func _enter_tree():
+	if debug:
+		print("WHAT THE FUCK")
+		debug_label = Label.new()
+		var node_2d = Node2D.new()
+		node_2d.z_index = 1000
+		node_2d.add_child(debug_label)
+		print("debug label: %s" % str(debug_label))
+		add_child(node_2d)
+		set_original_position(node_2d, Vector2())
 
 func _ready():
 	original_positions[self] = position
@@ -64,10 +79,12 @@ func _ready():
 	else:
 		modulate = Color.white
 	
-	if $visibility_notifier_2d.is_on_screen():
-		_on_visibility_notifier_2d_screen_entered()
-	else:
-		_on_visibility_notifier_2d_screen_exited()
+	if use_visibility_notifier:
+		if $visibility_notifier_2d.is_on_screen():
+			_on_visibility_notifier_2d_screen_entered()
+		else:
+			_on_visibility_notifier_2d_screen_exited()
+
 
 # original_position is local, i.e. relative to this node
 func set_original_position(child, original_position):
@@ -75,9 +92,13 @@ func set_original_position(child, original_position):
 	child.position = original_position
 
 func _process(_delta):
-	# all_children_process()
-	if is_on_screen and active:
+	if not is_inside_tree():
+		return
+	
+	if active and ((is_on_screen and use_visibility_notifier) or not use_visibility_notifier):
 		position_self()
+		if hifi_all_children_mode:
+			all_children_process()
 
 func single_child_process():
 	# var total_start = OS.get_ticks_usec()
@@ -171,6 +192,8 @@ func position_self():
 	# var calc_start = OS.get_ticks_usec()
 #	var calculated_position = original_positions[self] + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation)
 	var calculated_position = Vector2()
+	
+#	var position_adjustment = (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation).x
 	calculated_position.x = original_positions[self].x + (self_motion * (1.0 - parallax_scale)).rotated(-global_rotation).x
 	if 0 <= parallax_scale_v:
 		calculated_position.y = original_positions[self].y + (self_motion * (1.0 - parallax_scale_v)).rotated(-global_rotation).y
@@ -179,6 +202,13 @@ func position_self():
 	# var calc_time = OS.get_ticks_usec() - calc_start
 	# var assign_start = OS.get_ticks_usec()
 	position = calculated_position
+	if debug:
+		debug_label.rect_global_position = global.current_player.global_position + Vector2(-50, -80)
+		# debug_label.text = "%s -> %s" % [str(original_positions[self]), str(position)]
+		# debug_label.text = "%s -> %s" % [str(original_positions[self]), str(self_motion)]
+		# debug_label.text = "camera center: %s | og self pos: %s |\n parent global pos: %s" % [str(camera_center), str(original_positions[self]), str(get_parent().global_position)]
+		# debug_label.text = "camera center: %s \n pos_adj: %s \n wtf: %s" % [str(camera_center), str(position_adjustment), str(wtf)]
+		debug_label.text = find_parent("room").get_parent().name
 	# var assign_time = OS.get_ticks_usec() - assign_start
 #	global_performance.log_performance_data("position_calls", 1)
 #	global_performance.log_performance_data("calc_time", calc_time)
@@ -195,7 +225,8 @@ func _on_visibility_notifier_2d_screen_entered():
 
 func _on_visibility_notifier_2d_screen_exited():
 	is_on_screen = false
-	position = original_positions[self]
+	if use_visibility_notifier:
+		position = original_positions[self]
 
 func activate():
 	active = true

@@ -19,8 +19,12 @@ func start_spin_up(_body):
 	$win_timer.start()
 	spawn_truth()
 	global.current_cycle.get_camera().focus = self
+	$finale_sfx.play()
 
 func stop_spin_up(_body):
+	if has_won:
+		return
+	
 	if $tween.is_inside_tree():
 		$tween.stop_all()
 		$tween.remove_all()
@@ -29,6 +33,7 @@ func stop_spin_up(_body):
 	$truth_interval.stop()
 	$win_timer.stop()
 	global.current_cycle.get_camera().focus = global.current_player
+	$finale_sfx.stop()
 
 func spawn_truth():
 	var truth = truth_scene.instance()
@@ -47,6 +52,8 @@ func win():
 	has_won = true
 	global.has_won = true
 	get_tree().call_group("win", "on_win")
+	$finale_sfx/tween.interpolate_property($finale_sfx, "volume_db", $finale_sfx.volume_db, -80, 30, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	$finale_sfx/tween.start()
 
 func _process(_delta):
 	if has_won:

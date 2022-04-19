@@ -1,14 +1,21 @@
 extends Label
 
+export(bool) var currency = false
+
 var current_amount = 0
 
 func _ready():
 	modulate = Color(1,1,1,0)
-
+	
+	if currency:
+		add_to_group("currency_listeners")
 
 func go(amount):
 	current_amount += amount
-	text = "+%d" % current_amount
+	if currency:
+		text = "+%.1f" % current_amount
+	else:
+		text = "+%d" % current_amount
 	
 	var start_color  = Color(1,1,1,0.7)
 	var middle_color = Color.white
@@ -16,6 +23,14 @@ func go(amount):
 	var start_pos  = Vector2(36, 8)
 	var middle_pos = Vector2(36, 16)
 	var end_pos    = Vector2(36, 0)
+	if currency:
+		start_pos  = Vector2(16, 8)
+		middle_pos = Vector2(16, 16)
+		end_pos    = Vector2(16, 0)
+	else:
+		start_pos  = Vector2(36, 8)
+		middle_pos = Vector2(36, 16)
+		end_pos    = Vector2(36, 0)
 	var duration = 0.2
 	$tween.stop_all()
 	$tween.remove_all()
@@ -28,7 +43,8 @@ func go(amount):
 func _on_tween_tween_all_completed():
 	current_amount = 0
 
-
+func add_currency(amount):
+	go(amount)
 
 
 

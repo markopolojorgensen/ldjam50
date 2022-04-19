@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://font_big.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ninepatch.png" type="Texture" id=3]
+[ext_resource path="res://cycle/hud/icons_00.png" type="Texture" id=4]
+[ext_resource path="res://cycle/hud/icons_01.png" type="Texture" id=5]
+[ext_resource path="res://cycle/rooms/hourglass_label.gd" type="Script" id=6]
+[ext_resource path="res://cycle/rooms/piggybank_label.gd" type="Script" id=7]
+[ext_resource path="res://cycle/total_guests_label.gd" type="Script" id=8]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -29,10 +35,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("v_box_container/stats_container:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
-length = 20.0
+length = 30.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("v_box_container/label2:modulate")
 tracks/0/interp = 1
@@ -40,7 +58,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 13.2, 15.2, 20.1 ),
+"times": PoolRealArray( 0, 13.2, 15.2, 30 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
@@ -52,7 +70,19 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 10.2, 12.1, 20.1 ),
+"times": PoolRealArray( 0, 10.2, 12.1, 30 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("v_box_container/stats_container:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 17, 19.1, 30 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
@@ -78,19 +108,115 @@ custom_constants/separation = 32
 alignment = 1
 
 [node name="label" type="Label" parent="end_screen/v_box_container"]
-margin_top = 164.0
+margin_top = 130.0
 margin_right = 714.0
-margin_bottom = 190.0
+margin_bottom = 156.0
 custom_fonts/font = ExtResource( 2 )
 text = "Some say that party is still going..."
 align = 1
 
 [node name="label2" type="Label" parent="end_screen/v_box_container"]
-margin_top = 222.0
+margin_top = 188.0
 margin_right = 714.0
-margin_bottom = 235.0
+margin_bottom = 196.0
 text = "Thanks for playing!"
 align = 1
+
+[node name="stats_container" type="VBoxContainer" parent="end_screen/v_box_container"]
+margin_top = 228.0
+margin_right = 714.0
+margin_bottom = 268.0
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="margin_container" type="MarginContainer" parent="end_screen/v_box_container/stats_container"]
+margin_left = 332.0
+margin_right = 381.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nine_patch_rect" type="NinePatchRect" parent="end_screen/v_box_container/stats_container/margin_container"]
+margin_right = 49.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="margin_container" type="MarginContainer" parent="end_screen/v_box_container/stats_container/margin_container"]
+margin_right = 49.0
+margin_bottom = 40.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="end_screen/v_box_container/stats_container/margin_container/margin_container"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 36.0
+alignment = 1
+
+[node name="h_box_container" type="HBoxContainer" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container"]
+margin_right = 41.0
+margin_bottom = 8.0
+alignment = 1
+
+[node name="hourglass_label" type="Label" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container/h_box_container"]
+margin_left = 8.0
+margin_right = 20.0
+margin_bottom = 8.0
+text = "0/0"
+script = ExtResource( 6 )
+
+[node name="texture_rect" type="TextureRect" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container/h_box_container"]
+margin_left = 24.0
+margin_right = 32.0
+margin_bottom = 8.0
+texture = ExtResource( 5 )
+
+[node name="h_box_container2" type="HBoxContainer" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container"]
+margin_top = 12.0
+margin_right = 41.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="piggybank_label" type="Label" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container/h_box_container2"]
+margin_left = 8.0
+margin_right = 20.0
+margin_bottom = 8.0
+text = "0/0"
+script = ExtResource( 7 )
+
+[node name="texture_rect2" type="TextureRect" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container/h_box_container2"]
+margin_left = 24.0
+margin_right = 32.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="total_guests_label" type="Label" parent="end_screen/v_box_container/stats_container/margin_container/margin_container/v_box_container"]
+margin_top = 24.0
+margin_right = 41.0
+margin_bottom = 32.0
+text = "0/8 Guests"
+script = ExtResource( 8 )
 
 [node name="animation_player" type="AnimationPlayer" parent="end_screen"]
 autoplay = "fade_in"

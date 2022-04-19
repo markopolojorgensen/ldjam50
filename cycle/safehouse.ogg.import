@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/safehouse.ogg-d9a820e485b164fef446a3161d2bae9e.oggstr"
+
+[deps]
+
+source_file="res://cycle/safehouse.ogg"
+dest_files=[ "res://.import/safehouse.ogg-d9a820e485b164fef446a3161d2bae9e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

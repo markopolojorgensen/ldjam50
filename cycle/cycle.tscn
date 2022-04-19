@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=2]
+[gd_scene load_steps=140 format=2]
 
 [ext_resource path="res://cycle/rooms/room_rafters.tscn" type="PackedScene" id=1]
 [ext_resource path="res://_addons/intended_direction.tscn" type="PackedScene" id=2]
@@ -12,7 +12,12 @@
 [ext_resource path="res://cycle/rooms/room_big_disco.tscn" type="PackedScene" id=10]
 [ext_resource path="res://cycle/rooms/room_pyramid_scheme.tscn" type="PackedScene" id=11]
 [ext_resource path="res://cycle/player/coin_magnet.gd" type="Script" id=12]
-[ext_resource path="res://cycle/rooms/room_dont_look_down.tscn" type="PackedScene" id=13]
+[ext_resource path="res://cycle/rooms/room_crossroads.tscn" type="PackedScene" id=13]
+[ext_resource path="res://cycle/rooms/room_big_drop.tscn" type="PackedScene" id=14]
+[ext_resource path="res://cycle/rooms/room_conveyer.tscn" type="PackedScene" id=15]
+[ext_resource path="res://cycle/rooms/room_spiral.tscn" type="PackedScene" id=16]
+[ext_resource path="res://cycle/rooms/room_safehouse_right.tscn" type="PackedScene" id=17]
+[ext_resource path="res://cycle/player/respawn.wav" type="AudioStream" id=18]
 [ext_resource path="res://cycle/rooms/room_maze.tscn" type="PackedScene" id=19]
 [ext_resource path="res://cycle/inferno/inferno_render_400x100.png" type="Texture" id=22]
 [ext_resource path="res://cycle/inferno_hud.gd" type="Script" id=23]
@@ -46,33 +51,29 @@ region = Rect2( 0, 84, 51, 42 )
 atlas = ExtResource( 4 )
 region = Rect2( 51, 84, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=103]
 atlas = ExtResource( 4 )
-region = Rect2( 102, 84, 51, 42 )
+region = Rect2( 0, 168, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=104]
 atlas = ExtResource( 4 )
-region = Rect2( 153, 84, 51, 42 )
+region = Rect2( 51, 168, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=105]
 atlas = ExtResource( 4 )
-region = Rect2( 204, 84, 51, 42 )
+region = Rect2( 102, 168, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=106]
 atlas = ExtResource( 4 )
-region = Rect2( 255, 84, 51, 42 )
+region = Rect2( 153, 168, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=102]
+[sub_resource type="AtlasTexture" id=107]
 atlas = ExtResource( 4 )
-region = Rect2( 102, 126, 51, 42 )
+region = Rect2( 204, 168, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=101]
+[sub_resource type="AtlasTexture" id=108]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 126, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=100]
-atlas = ExtResource( 4 )
-region = Rect2( 51, 126, 51, 42 )
+region = Rect2( 255, 168, 51, 42 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
@@ -130,29 +131,33 @@ region = Rect2( 612, 42, 51, 42 )
 atlas = ExtResource( 4 )
 region = Rect2( 663, 42, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=103]
+[sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 168, 51, 42 )
+region = Rect2( 102, 84, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=104]
+[sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 4 )
-region = Rect2( 51, 168, 51, 42 )
+region = Rect2( 153, 84, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=105]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 4 )
-region = Rect2( 102, 168, 51, 42 )
+region = Rect2( 204, 84, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=106]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 4 )
-region = Rect2( 153, 168, 51, 42 )
+region = Rect2( 255, 84, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=107]
+[sub_resource type="AtlasTexture" id=102]
 atlas = ExtResource( 4 )
-region = Rect2( 204, 168, 51, 42 )
+region = Rect2( 102, 126, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=108]
+[sub_resource type="AtlasTexture" id=101]
 atlas = ExtResource( 4 )
-region = Rect2( 255, 168, 51, 42 )
+region = Rect2( 0, 126, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 4 )
+region = Rect2( 51, 126, 51, 42 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -164,6 +169,16 @@ animations = [ {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 23 ) ],
 "loop": false,
 "name": "jump_start",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ) ],
+"loop": false,
+"name": "idle_tap",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "run",
 "speed": 15.0
 }, {
 "frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 26 ), SubResource( 25 ) ],
@@ -185,16 +200,6 @@ animations = [ {
 "loop": false,
 "name": "attack_b",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "run",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ) ],
-"loop": false,
-"name": "idle_tap",
-"speed": 12.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -504,8 +509,7 @@ pause_mode = 1
 [node name="level" type="Node2D" parent="world"]
 
 [node name="camera" type="Camera2D" parent="world/level" groups=["camera"]]
-visible = false
-position = Vector2( 177, 271 )
+position = Vector2( 500, 248 )
 current = true
 drag_margin_v_enabled = true
 editor_draw_drag_margin = true
@@ -514,7 +518,8 @@ script = ExtResource( 7 )
 [node name="left_trigger" type="Area2D" parent="world/level/camera"]
 position = Vector2( -340, 0 )
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
+monitorable = false
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="world/level/camera/left_trigger"]
 shape = SubResource( 6 )
@@ -522,7 +527,8 @@ shape = SubResource( 6 )
 [node name="right_trigger" type="Area2D" parent="world/level/camera"]
 position = Vector2( 373, 0 )
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
+monitorable = false
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="world/level/camera/right_trigger"]
 shape = SubResource( 6 )
@@ -545,11 +551,13 @@ volume_db = -12.0
 bus = "Effects"
 
 [node name="player" type="RigidBody2D" parent="world/level"]
-position = Vector2( 172, 267 )
+position = Vector2( 486, 261 )
 collision_layer = 2
 mode = 2
 physics_material_override = SubResource( 5 )
 gravity_scale = 1.5
+continuous_cd = 2
+can_sleep = false
 linear_damp = 0.0
 script = ExtResource( 3 )
 
@@ -653,102 +661,160 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="room_unloader_safehouse" type="Node2D" parent="world/level"]
-script = ExtResource( 36 )
-room_scene = ExtResource( 9 )
-
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse"]
-position = Vector2( 524, 211 )
-rect = Rect2( -893, -565, 1786, 1130 )
-script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_safehouse" instance=ExtResource( 9 )]
-
-[node name="room_unloader_safehouse2" type="Node2D" parent="world/level"]
-position = Vector2( 6259, -80 )
-script = ExtResource( 36 )
-room_scene = ExtResource( 9 )
-
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse2"]
-position = Vector2( 524, 211 )
-rect = Rect2( -893, -565, 1786, 1130 )
-script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_safehouse2" instance=ExtResource( 9 )]
-
-[node name="room_unloader_rafters" type="Node2D" parent="world/level"]
-position = Vector2( 2288, 335 )
-script = ExtResource( 36 )
-room_scene = ExtResource( 1 )
-
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_rafters"]
-position = Vector2( 361, -479 )
-rect = Rect2( -939, -941, 1878, 1882 )
-script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_rafters" instance=ExtResource( 1 )]
-
 [node name="room_unloader_maze" type="Node2D" parent="world/level"]
-position = Vector2( -1350, 367 )
+position = Vector2( -1352, 368 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 19 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_maze"]
 position = Vector2( 489, -127 )
+z_index = -20
 rect = Rect2( -1006, -565, 2012, 1130 )
 script = ExtResource( 37 )
 
 [node name="room" parent="world/level/room_unloader_maze" instance=ExtResource( 19 )]
 
-[node name="room_unloader_distant_mountains" type="Node2D" parent="world/level"]
-position = Vector2( 4927, 288 )
-script = ExtResource( 36 )
-room_scene = ExtResource( 8 )
-
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_distant_mountains"]
-position = Vector2( 0, -626 )
-scale = Vector2( 1, 1.46964 )
-rect = Rect2( -1394, -741, 2788, 1482 )
-script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_distant_mountains" instance=ExtResource( 8 )]
-
-[node name="room_unloader_big_disco" type="Node2D" parent="world/level"]
-position = Vector2( 5035, -1898 )
-script = ExtResource( 36 )
-room_scene = ExtResource( 10 )
-
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_big_disco"]
-position = Vector2( 350, 337 )
-rect = Rect2( -1170, -770, 2340, 1540 )
-script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_big_disco" instance=ExtResource( 10 )]
-
 [node name="room_unloader_pyramid_scheme" type="Node2D" parent="world/level"]
-position = Vector2( 906, -145 )
+position = Vector2( 904, -144 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 11 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_pyramid_scheme"]
 position = Vector2( -29, -130 )
+z_index = -20
 rect = Rect2( -1170, -618, 2340, 1236 )
 script = ExtResource( 37 )
 fix_it = true
 
 [node name="room" parent="world/level/room_unloader_pyramid_scheme" instance=ExtResource( 11 )]
 
-[node name="room_unloader_dont_look_down" type="Node2D" parent="world/level"]
-position = Vector2( 1242, 319 )
+[node name="room_unloader_safehouse" type="Node2D" parent="world/level"]
+position = Vector2( -8, 0 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 9 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse"]
+position = Vector2( 497, 211 )
+scale = Vector2( 0.902576, 1 )
+z_index = -20
+rect = Rect2( -893, -565, 1786, 1130 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_safehouse" instance=ExtResource( 9 )]
+
+[node name="room_unloader_crossroads" type="Node2D" parent="world/level"]
+position = Vector2( 1240, 320 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 13 )
 
-[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_dont_look_down"]
-position = Vector2( 323, 406 )
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_crossroads"]
+position = Vector2( 323, 334.5 )
+z_index = -20
+rect = Rect2( -562, -689.5, 1124, 1379 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_crossroads" instance=ExtResource( 13 )]
+
+[node name="room_unloader_rafters" type="Node2D" parent="world/level"]
+position = Vector2( 2288, 336 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 1 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_rafters"]
+position = Vector2( 361, -479 )
+z_index = -20
+rect = Rect2( -939, -941, 1878, 1882 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_rafters" instance=ExtResource( 1 )]
+
+[node name="room_unloader_distant_mountains" type="Node2D" parent="world/level"]
+position = Vector2( 4928, 288 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 8 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_distant_mountains"]
+position = Vector2( -122.5, -895 )
+scale = Vector2( 1.13953, 1.37922 )
+z_index = -20
+rect = Rect2( -1394, -741, 2788, 1482 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_distant_mountains" instance=ExtResource( 8 )]
+
+[node name="room_unloader_big_disco" type="Node2D" parent="world/level"]
+position = Vector2( 5040, -1896 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 10 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_big_disco"]
+position = Vector2( 350, 337 )
+z_index = -20
+rect = Rect2( -1170, -770, 2340, 1540 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_big_disco" instance=ExtResource( 10 )]
+
+[node name="room_unloader_safehouse2" type="Node2D" parent="world/level"]
+position = Vector2( 6256, -80 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 17 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse2"]
+position = Vector2( 515.5, 67.5 )
+scale = Vector2( 0.7486, 0.746018 )
+z_index = -20
+rect = Rect2( -893, -565, 1786, 1130 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_safehouse2" instance=ExtResource( 17 )]
+
+[node name="room_unloader_big_drop" type="Node2D" parent="world/level"]
+position = Vector2( 2184, 1088 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 14 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_big_drop"]
+position = Vector2( 1300.5, -154.5 )
+scale = Vector2( 3.02402, 0.766181 )
+z_index = -20
 rect = Rect2( -562, -618, 1124, 1236 )
 script = ExtResource( 37 )
 
-[node name="room" parent="world/level/room_unloader_dont_look_down" instance=ExtResource( 13 )]
+[node name="room" parent="world/level/room_unloader_big_drop" instance=ExtResource( 14 )]
+
+[node name="room_unloader_conveyer" type="Node2D" parent="world/level"]
+position = Vector2( 5192, 688 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 15 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_conveyer"]
+position = Vector2( 1039.25, 314.25 )
+scale = Vector2( 2.25934, 0.811893 )
+z_index = -20
+rect = Rect2( -562, -618, 1124, 1236 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_conveyer" instance=ExtResource( 15 )]
+
+[node name="room_unloader_spiral" type="Node2D" parent="world/level"]
+position = Vector2( 7520, 32 )
+script = ExtResource( 36 )
+room_scene = ExtResource( 16 )
+
+[node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_spiral"]
+position = Vector2( 1551, 579.5 )
+z_index = -20
+rect = Rect2( -1950, -791.5, 3900, 1583 )
+script = ExtResource( 37 )
+
+[node name="room" parent="world/level/room_unloader_spiral" instance=ExtResource( 16 )]
+
+[node name="spawn_position_left" type="Position2D" parent="world"]
+position = Vector2( 554, 300 )
+
+[node name="spawn_position_right" type="Position2D" parent="world"]
+position = Vector2( 6803, 233 )
 
 [node name="hud" type="CanvasLayer" parent="."]
 layer = 2
@@ -817,6 +883,10 @@ script = ExtResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="player_respawn_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+bus = "Effects"
 
 [connection signal="body_entered" from="world/level/camera/left_trigger" to="world/level/camera" method="_on_left_trigger_body_entered"]
 [connection signal="body_entered" from="world/level/camera/right_trigger" to="world/level/camera" method="_on_right_trigger_body_entered"]

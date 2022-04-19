@@ -11,7 +11,7 @@ height = 6.0
 
 [node name="big_balloon" type="RigidBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 physics_material_override = SubResource( 2 )
 gravity_scale = -0.25
 linear_damp = 0.0

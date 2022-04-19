@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://cycle/npcs/npc.tscn" type="PackedScene" id=1]
 [ext_resource path="res://cycle/npcs/generic_npc.gd" type="Script" id=2]
 [ext_resource path="res://cycle/npcs/basic_npcs.png" type="Texture" id=3]
 [ext_resource path="res://cycle/npcs/npc_invite_fanfare.wav" type="AudioStream" id=4]
+[ext_resource path="res://cycle/decorations/disco_ball/disco_ball.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -100,9 +101,10 @@ script = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
-offset = Vector2( 0, -32 )
+offset = Vector2( 0, -36 )
 hframes = 4
 vframes = 4
+frame = 14
 
 [node name="player_proximity_detector" parent="." index="2"]
 visible = false
@@ -130,3 +132,8 @@ bus = "Fanfares"
 
 [node name="coin_spawn_position" type="Position2D" parent="." index="9"]
 position = Vector2( 0, -26 )
+
+[node name="disco_ball" parent="." index="10" instance=ExtResource( 5 )]
+position = Vector2( 0, -59 )
+scale = Vector2( 0.25, 0.25 )
+always_there = true

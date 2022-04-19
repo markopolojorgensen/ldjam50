@@ -13,7 +13,7 @@ func _ready():
 func _physics_process(delta):
 	var to_remove = []
 	for coin in coins_being_grabbed:
-		if not is_instance_valid(coin):
+		if not is_instance_valid(coin) or not coin.is_inside_tree():
 			to_remove.append(coin)
 		else:
 			var desired_lv = coin.global_position.direction_to(global_position) * 640

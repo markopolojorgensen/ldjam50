@@ -1,45 +1,148 @@
+720x405
+
+
+
+Party on! Do you have what it takes to keep the party going and make it to that giant disco in the sky? Find out in this time-pressure platformer! This is my submission for the 'Extra' category of ludum dare 50.
+
+controls
+wasd/arrow keys to move
+x to attack
+z to interact / talk
+controllers should work too.
+keyboard key notes: those names are for qwerty, it should still be the bottom left two buttons even on non-qwerty keyboards. I don't have a non-qwerty keyboard to test with, so let me know if it works or doesn't work for you!
+
+
+
 TODO
-  secrets should explode
+  hud: z to interact
 
-  "return here to replenish party time"
-  "X hourglasses found"
-  balloons shouldn't respawn, even if you lose a cycle
-  multiple tiers? balloons I, balloons II, etc?
 
+  description:
+
+
+
+
+
+
+npc order
+  0 - music
+  1 - balloons
+  2 - bundles
+  3 - hats
+  4 - bunting
+  5 - streamers
+  6 - banners
+  7 - disco balls
+
+
+store config
+  music
+  balloons
+  bunting
+  hats
+  bundles
+  streamers
+  banners
+  disco balls
+
+rooms
+  safehouse   - music npc
+  pyramid     - disco balls npc
+  maze        - balloons npc
+  rafters     - bunting npc
+  mountains   - hats npc
+  sky_disco
+  crossroads  - streamers npc
+  big drop    - bundles npc
+  spiral      - banners
+  conveyer
+
+
+
+
+room process
+  rough layout
+  pois
+    punchable balloons
+    hourglasses
+    piggy banks
+  secrets
+    fake walls
+    fake floors
+
+  non-invited npcs
+  invited npcs
+
+  decorations
+    background
+    foreground
+
+    floors (v-locked)
+      balloons
+      bundles
+      hats
+      speaker stacks
+    ceilings (v-locked)
+      streamers
+      bunting
+      banners
+      boards
+    non-v-locked decorations
+      far foreground
+      disco balls
+
+
+
+
+
+
+hourglass pickup ids:
+  1: maze
+  2: rafters
+  3: pyramid
+  4: big drop
+  5,6,7,8: order station
+  9: conveyer
+
+piggy banks pickup ids
+  1 & 2: pyramid
+  3: big drop
+  4: maze
+  5: spiral
+  6: conveyer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  glowing stars bg decoration?
   double jump off the top of the pyramid to get to another safehouse?
-
-
-  npcs should say stuff
-    probably different things
-  npcs should move to the safehouse, probably when you meet them
-  do npcs do anything?
-    yeah, they give you advice & tell you about secrets
-  npcs move to every room you visit, assuming you've bought their item
-    otherwise, they stay where they started?
-
-
+  music slows down as the countdown approaches zero?
+  balloons shouldn't respawn, even if you lose a cycle...?
+  multiple tiers? balloons I, balloons II, etc?
+  takes forever to get up to disco in the sky so you have to have gotten all the time upgrades?
+  balloons drop time particles, but don't increase max?
 
   level design ideas
     elevator shaft
     bunkers / series of pits
     suspension bridge / series of platforms hanging from the ceiling
-
-
-
-  decoration refinement
-    pyramid needs decorations
-    maze needs decorations
-    more disco balls around the place
-    more speakers around the place
-    put piggy banks around
-
-  secrets
-    punchable walls & fake floors
-
-  glowing stars bg decoration?
-
-  disco in the sky shouldn't play base music
-  end screen ramp up sfx / music fade out
 
   NPCs
     DJ
@@ -68,37 +171,12 @@ TODO
       "You might think I like wrap music, but I'm more into future bass."
       "This is really turning out to be a long party; better wrap it up before my wife gets home."
 
-
-
-  get_world() -> things need to spawn stuff in the room, since that's what gets unloaded
-
-  music slows down as the countdown approaches zero?
-
-  tutorial
-    this is you
-      wasd / arrow keys to move
-    you love throwing parties
-      x or q activates things you are next to
-    x or q also attacks
-      things can be attacked
-    "this party won't last very long without more merrymakers, I had better invite some people!"
-
-  giant disco in the sky platforms appear based on purchases?
-  takes forever to get up to disco in the sky so you have to have gotten all the time upgrades?
-  balloons drop time particles, but don't increase max?
-
   upgrades:
     party hats for pc & npcs
     punch bowl that sells multi-jump
     juke box that sells hourglasses
     run faster when less than 20 seconds left
     stamina / sprint ability
-
-
-
-
-
-
 
 art ideas
   chairs
@@ -130,69 +208,16 @@ art ideas
 
 
 
-store config
-  music
-  balloons
-  bundles
-  hats
-  bunting
-  streamers
-  banners
-  disco balls
-
-rooms
-  safehouse
-  pyramid
-  maze
-  rafters
-  mountains
-  sky_disco
-  dont_look_down - streamers npc
-
-
-
-
-
-room process
-  rough layout
-  pois
-    punchable balloons
-    hourglasses
-    piggy banks
-
-  secrets
-    fake walls
-    fake floors
-  non-invited npcs
-  invited npcs
-
-  decorations
-    floors (v-locked)
-      balloons
-      bundles
-      hats
-      speaker stacks
-    ceilings (v-locked)
-      streamers
-      bunting
-      banners
-      boards
-    non-v-locked decorations
-      far foreground
-      disco balls
 
 
 
 
 
 
-hourglass pickups:
-  1: maze
-  2: rafters
-  3: pyramid
 
-piggy banks
-  1 & 2: pyramid
+
+
+
 
 
 
@@ -201,6 +226,52 @@ piggy banks
 
 
 DONE
+  thanks for playing end screen should show stats
+    hourglass
+    pigs
+    party-goers
+  dialogue up/down sfx
+  music -> ogg, 255 MB -> 26 MB, pretty good result
+  music expands based on number of decorations you have purchased
+  extend the music
+  finish decorating
+  final pass on level seams
+  final pass on secrets w/ full decorations
+  final pass on balloon spawn / respawn trigger boxes
+  finish placing npcs
+  main menu:
+    tutorial
+    play game
+    credits: m3x6
+    (menu artwork)
+    (title art)
+  fleeing player sfx
+  piggy bank fanfare
+  balloons should never respawn
+  player just teleports to safehouse when timer runs out
+  controllers should also work
+  tutorial
+    this is you
+      wasd / arrow keys to move
+    you love throwing parties
+    space or up to jump
+    x to attack
+    z to talk/interact
+  more rain on the distant moutains
+  get_world() -> things need to spawn stuff in the room, since that's what gets unloaded
+  end screen ramp up sfx / music fade out
+  disco in the sky shouldn't play base music
+  "return here to replenish party time"
+  "X hourglasses found"
+  fixed: piggy banks have wrong ids
+  fixed: spiral jumps need more diagonal clearance
+  fixed: spiral hourglass has wrong id
+  npcs hats
+  money needs +X indicator like time hud has
+  giant disco in the sky platforms appear based on purchases?
+  hourglasses that spawn when you buy them
+  all rooms first pass: layout, balloons, hourglasses, banks, secrets
+  secrets should explode
   npc conditional dialogue
   halloween mummy who loves streamers
   pyramid scheme first pass

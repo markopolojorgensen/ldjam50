@@ -4,12 +4,22 @@ export(bool) var start_muted = false
 export(bool) var unlock_all_decorations = false
 export(bool) var invite_all_npcs = false
 export(bool) var super_time = false
-
+export(bool) var big_wallet = false
+export(bool) var short_fuse = false
 
 signal beat
 
 const cycle_scene = preload("cycle/cycle.tscn")
-var current_cycle
+const tutorial_scene = preload("tutorial/tutorial.tscn")
+const menu_scene = preload("main_menu.tscn")
+
+var scenes = {
+	"cycle": cycle_scene.instance(),
+	"tutorial": tutorial_scene.instance(),
+	"main_menu": menu_scene.instance(),
+}
+var current_scene_key : String
+var future_scene_key : String
 
 const end_screen_scene = preload("end_screen.tscn")
 
@@ -18,17 +28,24 @@ const end_screen_scene = preload("end_screen.tscn")
 var bpm_track
 var bpms = {
 	"safehouse": 62,
-	"on_the_clock": 120,
+	"on_the_clock1": 120,
+	"on_the_clock2": 120,
+	"on_the_clock3": 120,
+	"on_the_clock4": 120,
+	"on_the_clock5": 120,
 	"empty_rumble": 5,
 }
-onready var music_tracks = [$safehouse, $on_the_clock, $empty_rumble]
+onready var music_tracks = [$safehouse, $on_the_clock1, $on_the_clock2, $on_the_clock3, $on_the_clock4, $on_the_clock5, $empty_rumble]
 var beat_count = 0
 # used to notice when music has looped
 var previous_playback_position = 0
 # used to decide which track to fade to when player buys music
 var in_base = false
 
-
+func _enter_tree():
+	if invite_all_npcs:
+		for id in [0,1,2,3,4,5,6,7]:
+			global.invited_npcs.append(id)
 
 func _ready():
 	add_to_group("store_listeners")
@@ -38,7 +55,11 @@ func _ready():
 	
 	$music_fade_timer.connect("timeout", self, "post_fade")
 	
-	create_new_cycle()
+	# create_new_cycle()
+	# create_new_tutorial()
+	# swap_to("tutorial")
+	# swap_to("cycle")
+	swap_to("main_menu")
 	
 	if start_muted:
 		toggle_mute()
@@ -55,27 +76,36 @@ func _ready():
 			"disco balls",
 		]
 		get_tree().call_group("store_listeners", "bought_item")
-		
-		if invite_all_npcs:
-			for id in [0,1,2,3,4,5,6,7]:
-				global.invited_npcs.append(id)
 	
 	if super_time:
-		global.current_cycle.cycle_time += 6000
+		scenes["cycle"].cycle_time += 6000
+	
+	if big_wallet:
+		global.currency += 1000
+	
+	if short_fuse:
+		scenes["cycle"].cycle_time = 5
 	
 	call_deferred("leave_base")
 
-func cycle_ended():
-	print("resetting cycle")
-	$cycle_reset_animation_player.play("reset")
+#func cycle_ended():
+#	print("resetting cycle")
+#	$cycle_reset_animation_player.play("reset")
 
-func create_new_cycle():
-	if is_instance_valid(current_cycle):
-		current_cycle.queue_free()
-	current_cycle = cycle_scene.instance()
-	global.current_cycle = current_cycle
-	add_child(current_cycle)
-	current_cycle.connect("cycle_ended", self, "cycle_ended")
+#func create_new_cycle():
+#	if is_instance_valid(current_cycle):
+#		current_cycle.queue_free()
+#	current_cycle = cycle_scene.instance()
+#	global.current_cycle = current_cycle
+#	add_child(current_cycle)
+#	current_cycle.connect("cycle_ended", self, "cycle_ended")
+
+#func create_new_tutorial():
+#	var tutorial = tutorial_scene.instance()
+#	global.current_cycle = tutorial
+#	add_child(tutorial)
+#	print("fixme: free tutorial")
+#	current_cycle.connect("cycle_ended", self, "cycle_ended")
 
 func _unhandled_input(event):
 	if event.is_action_pressed("instaquit"):
@@ -102,7 +132,19 @@ func enter_base():
 func leave_base():
 	in_base = false
 	if "music" in global.items_purchased:
-		crossfade($on_the_clock)
+		var items_that_count = [
+			"music",
+			"hats",
+			"streamers",
+			"banners",
+			"disco balls",
+		]
+		var count = 0
+		for item in items_that_count:
+			if item in global.items_purchased:
+				count += 1
+		var clock_track = get_node("on_the_clock%d" % count)
+		crossfade(clock_track)
 	else:
 		crossfade($empty_rumble)
 
@@ -173,10 +215,29 @@ func on_win():
 func get_bpm():
 	return bpms[bpm_track.name]
 
+func tutorial_over():
+	swap_to("cycle")
 
+func swap_to(key):
+	if scenes.has(key):
+		future_scene_key = key
+		$cycle_reset_animation_player.play("reset")
+		if current_scene_key == "main_menu":
+			$hourglass_fanfare.play()
+	else:
+		print("bad scene key: %s" % key)
 
+# not sure this is deferred when called from AnimationPlayer, so we defer here
+func actual_swap():
+	call_deferred("swap_but_for_real_though")
 
-
+func swap_but_for_real_though():
+	if current_scene_key != null and scenes.has(current_scene_key):
+		# remove previous scene
+		remove_child(scenes[current_scene_key])
+	
+	current_scene_key = future_scene_key
+	add_child(scenes[current_scene_key])
 
 
 

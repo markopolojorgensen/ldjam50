@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://logo_intro/logo_intro.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hud_theme.tres" type="Theme" id=3]
-[ext_resource path="res://on_the_clock.wav" type="AudioStream" id=4]
-[ext_resource path="res://safehouse.wav" type="AudioStream" id=5]
+[ext_resource path="res://music/on_the_clock_full_mix_less_three.ogg" type="AudioStream" id=4]
+[ext_resource path="res://cycle/safehouse.ogg" type="AudioStream" id=5]
 [ext_resource path="res://cycle/hourglass_fanfare.wav" type="AudioStream" id=6]
 [ext_resource path="res://hourglass_fanfare.gd" type="Script" id=7]
-[ext_resource path="res://empty_rumble.wav" type="AudioStream" id=8]
+[ext_resource path="res://cycle/empty_rumble.ogg" type="AudioStream" id=8]
+[ext_resource path="res://music/on_the_clock_full_mix.ogg" type="AudioStream" id=9]
+[ext_resource path="res://music/on_the_clock_full_mix_less_four.ogg" type="AudioStream" id=10]
+[ext_resource path="res://music/on_the_clock_full_mix_less_two.ogg" type="AudioStream" id=11]
+[ext_resource path="res://music/on_the_clock_full_mix_less_one.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -49,18 +53,13 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "create_new_cycle"
+"method": "actual_swap"
 } ]
 }
 
 [node name="game" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
-start_muted = true
-
-[node name="logo_intro" parent="." instance=ExtResource( 2 )]
-visible = false
-skip = true
 
 [node name="cycle_reset_animation_player" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 8 )
@@ -73,13 +72,30 @@ layer = 10
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="on_the_clock" type="AudioStreamPlayer" parent="."]
+[node name="on_the_clock1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+bus = "Music"
+
+[node name="on_the_clock2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Music"
+
+[node name="on_the_clock3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "Music"
+
+[node name="on_the_clock4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+bus = "Music"
+
+[node name="on_the_clock5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 bus = "Music"
 
 [node name="safehouse" type="AudioStreamPlayer" parent="."]
@@ -101,3 +117,8 @@ script = ExtResource( 7 )
 [node name="music_fade_timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="canvas_layer" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="logo_intro" parent="canvas_layer" instance=ExtResource( 2 )]

@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _process(_delta):
-	if not is_instance_valid(global.current_player):
+	if not is_instance_valid(global.current_player) or not global.current_player.is_inside_tree():
 		return
 	
 	var distance = global.current_player.global_position.distance_to(global_position)

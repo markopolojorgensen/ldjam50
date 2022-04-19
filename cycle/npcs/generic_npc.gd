@@ -7,6 +7,8 @@ export(int, 7) var npc_id = 0
 # true for where they are originally found
 export(bool) var flip_active = false
 
+export(bool) var is_tutorial = false
+
 var celebration_musings = 0
 
 var hint_phrase = ""
@@ -23,6 +25,10 @@ var always_phrases = [
 	"Hey! How's life?",
 	"It's really nice to kick back and unwind.",
 	"Played any good games recently?",
+	"Look out for fake walls, there's secrets hidden everywhere!",
+	"Some say there's herds of wild balloons that roam the plains.",
+	"The more decorations you get, the more fancy this place will look!",
+	"Constantly attacking may help you move faster, give it a try.",
 ]
 
 var likes_list = [
@@ -41,13 +47,18 @@ var teleported = false
 
 const coin_scene = preload("res://cycle/coin.tscn")
 
+func _enter_tree():
+	call_deferred("fancy_update")
+
 func _ready():
 	# don't have to call ._ready()?
 	if randf() < 0.5:
 		squash = false
-	fancy_update()
 	add_to_group("generic_npcs")
 	$teleport_timer.connect("timeout", self, "queue_free")
+	
+	if npc_id != 7:
+		$disco_ball.queue_free()
 
 func _process(_delta):
 	if $player_proximity_detector.is_player_near():
@@ -84,10 +95,12 @@ func fancy_update():
 		return
 	
 	var invited = (npc_id in global.invited_npcs)
+	if is_tutorial:
+		invited = true
 	
 	if (invited and not flip_active) or (not invited and flip_active):
 		if not activatable:
-			$sprite_animation_player.play_backwards("teleport")
+			# $sprite_animation_player.play_backwards("teleport")
 			activatable = true
 			show()
 	else:
@@ -101,6 +114,9 @@ class PhraseAction:
 	var weight = 1
 
 func pick_phrase():
+	if is_tutorial:
+		return "This is the end of the tutorial. Keep an eye out for others to invite to your party. Good luck!"
+	
 	var phrase_actions = []
 	
 	var like = likes_list[npc_id]
@@ -114,7 +130,6 @@ func pick_phrase():
 			
 			if global.chip_in_timers[npc_id] <= 0:
 				var phrase_action = PhraseAction.new()
-				phrase_action.priority = 10
 				phrase_action.callback_name = "chip_in"
 				phrase_action.text = "Hey, I haven't chipped in for a while, let me fix that."
 				phrase_actions.append(phrase_action)
@@ -203,17 +218,20 @@ func pick_phrase():
 				phrase_action.text = "Wow, really brought home the bacon, huh? Nice work!"
 				phrase_actions.append(phrase_action)
 			
-			if global.items_purchased.size() <= 2:
+			if global.items_purchased.size() <= 4:
 				phrase_action = PhraseAction.new()
 				phrase_action.text = "It's still a nice party, even without a ton of decorations."
 				phrase_actions.append(phrase_action)
-			elif 4 <= global.items_purchased.size():
+			elif 6 <= global.items_purchased.size():
 				phrase_action = PhraseAction.new()
 				var thing = global.pick_random_from_list(global.items_purchased)
-				if thing == "music":
-					thing = "speakers"
-				phrase_action.text = "I really dig the %s, where'd you get them?" % thing
-				phrase_actions.append(phrase_action)
+				if not "hourglass" in thing:
+					if thing == "music":
+						thing = "speakers"
+					phrase_action.text = "I really dig the %s, where'd you get them?" % thing
+					phrase_actions.append(phrase_action)
+			
+			if 10 <= global.items_purchased.size():
 				phrase_action = PhraseAction.new()
 				phrase_action.text = "You really went all out with decorations! This is great."
 				phrase_actions.append(phrase_action)
@@ -229,7 +247,6 @@ func pick_phrase():
 			
 			if 60 < global.discussion_timers[npc_id]:
 				phrase_action = PhraseAction.new()
-				phrase_action.priority = 11
 				phrase_action.text = "Been a while! How are things?"
 				phrase_actions.append(phrase_action)
 			

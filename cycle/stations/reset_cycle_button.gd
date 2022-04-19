@@ -12,11 +12,11 @@ func _process(_delta):
 		$sprite.frame = 0
 
 func _unhandled_input(event):
-	if event.is_action_pressed("attack") and $player_proximity_detector.is_player_near():
+	if event.is_action_pressed("cycle_talk") and $player_proximity_detector.is_player_near():
 		if not activated:
 			activated = true
 			get_tree().set_input_as_handled()
 			$sprite.frame = 2
-			global.current_cycle.end_cycle_now()
+			global.game.tutorial_over()
 
 

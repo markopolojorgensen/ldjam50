@@ -13,8 +13,9 @@ func _on_hourglass_pickup_body_entered(_body):
 		global.hourglass_picked_up(self)
 		hourglass_picked_up()
 		get_tree().call_group("hourglass_pickup_listeners", "hourglass_picked_up")
+		print("hourglass pickup %s %d acquired" % [name, id])
 	else:
-		print("pickup %d already acquired?!" % id)
+		print("  hourglass pickup %s %d already acquired?!" % [name, id])
 	queue_free()
 
 func hourglass_picked_up():

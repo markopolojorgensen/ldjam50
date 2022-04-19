@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://cycle/decorations/round_bunting.png" type="Texture" id=1]
 [ext_resource path="res://cycle/decorations/decoration_purchase_checker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cycle/decorations/round_bunting.gd" type="Script" id=3]
 
 [node name="round_bunting" type="Sprite"]
 texture = ExtResource( 1 )
 offset = Vector2( 0, 8 )
+script = ExtResource( 3 )
 
 [node name="decoration_purchase_checker" parent="." instance=ExtResource( 2 )]
 decoration_name = "bunting"

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://cycle/npcs/npc.gd" type="Script" id=1]
 [ext_resource path="res://cycle/player_proximity_detector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cycle/stations/order_station/store_open.wav" type="AudioStream" id=3]
 [ext_resource path="res://hud_theme.tres" type="Theme" id=4]
 [ext_resource path="res://ninepatch.png" type="Texture" id=5]
+[ext_resource path="res://cycle/stations/order_station/store_close.wav" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 64.0
@@ -122,5 +124,15 @@ anims/fade_in_text = SubResource( 2 )
 [node name="dialogue_duration" type="Timer" parent="."]
 wait_time = 30.0
 one_shot = true
+
+[node name="open_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+pitch_scale = 2.0
+bus = "Effects"
+
+[node name="close_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+pitch_scale = 2.0
+bus = "Effects"
 
 [connection signal="timeout" from="dialogue_duration" to="." method="_on_dialogue_duration_timeout"]

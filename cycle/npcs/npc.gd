@@ -10,7 +10,8 @@ func _ready():
 	global.music.connect("beat", self, "beat")
 	$player_proximity_detector.connect("body_entered", self, "player_entered")
 	$player_proximity_detector.connect("body_exited", self, "player_exited")
-	hide_dialogue()
+	# hide_dialogue()
+	$z_index.modulate = Color(1,1,1,0)
 
 func beat():
 	pass
@@ -36,11 +37,13 @@ func show_dialogue(text):
 	# print("showing dialogue: %s" % text)
 	dialogue_label.bbcode_text = "[center]%s[/center]" % text
 	$text_animation_player.play("fade_in_text")
+	$open_sfx.play()
 	$dialogue_duration.start()
 
 func hide_dialogue():
 	# print($text_animation_player.get_animation_list())
 	$text_animation_player.play_backwards("fade_in_text")
+	$close_sfx.play()
 	$dialogue_duration.stop()
 
 func is_showing_dialogue():

@@ -25,8 +25,11 @@ onready var og_gravity = gravity_scale
 
 func _enter_tree():
 	global.current_player = self
+	wants_to_jump = false # for respawning
+	bought_item()
 
 func _ready():
+	$coin_magnet.show()
 	add_to_group("store_listeners")
 	global.music.connect("beat", self, "beat")
 	$animated_sprite.play("jump_loop")
@@ -56,7 +59,8 @@ func bought_item():
 			"disco balls":
 				double_jump_enabled = true
 			_:
-				print("player: unrecognized purchase: %s" % item)
+				if not "hourglass" in item:
+					print("player: unrecognized purchase: %s" % item)
 	
 	max_speed = max_speed_fundamental * speed_multiplier
 #	print("new max speed: %.1f instead of %.1f" % [max_speed, max_speed_fundamental])
@@ -65,6 +69,8 @@ func bought_item():
 
 func _process(_delta):
 	var intended_direction = $intended_direction.get_intended_direction()
+	if global.has_won:
+		intended_direction = Vector2()
 	var desired_animation
 	
 	if intended_direction.x < -0.1:
@@ -126,6 +132,8 @@ func _integrate_forces(state):
 	# $label.text = "touching ground: %s" % str(touching_ground)
 	
 	var intended_direction = $intended_direction.get_intended_direction()
+	if global.has_won:
+		intended_direction = Vector2()
 	var max_impulse_magnitude = max_acceleration * state.step
 	if 0 < abs(intended_direction.x):
 		var horizontal_direction = sign(intended_direction.x)
@@ -167,6 +175,9 @@ func start_jump():
 		$jump_sfx.play()
 
 func _unhandled_input(event):
+	if global.has_won:
+		return
+	
 	if event.is_action_pressed("jump"):
 		get_tree().set_input_as_handled()
 		wants_to_jump = true
