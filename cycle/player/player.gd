@@ -154,11 +154,11 @@ func _integrate_forces(state):
 	if wants_to_jump:
 		apply_central_impulse(Vector2(0, -continuous_jump_magnitude) * state.step)
 	
-	if $fall_ray.is_colliding() and 20 < linear_velocity.y:
-		var speed_diff = 20 - linear_velocity.y
-		apply_central_impulse(Vector2(0, speed_diff / 3.0))
+#	if $fall_ray.is_colliding() and 20 < linear_velocity.y:
+#		var speed_diff = 20 - linear_velocity.y
+#		apply_central_impulse(Vector2(0, speed_diff / 3.0))
 	
-	$fall_ray.cast_to.y = clamp(linear_velocity.y * state.step * 3, 1.0, INF)
+#	$fall_ray.cast_to.y = clamp(linear_velocity.y * state.step * 3, 1.0, INF)
 
 func start_jump():
 	if $jump_cooldown.is_stopped():

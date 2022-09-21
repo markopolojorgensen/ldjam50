@@ -669,13 +669,12 @@ tile_data = PoolIntArray( 720899, 0, 196609, 720900, 0, 3, 720901, 0, 3, 720902,
 [node name="disco" type="AnimatedSprite" parent="margin_container/v_box_container/h_box_container/title_art"]
 position = Vector2( 182, 77 )
 frames = SubResource( 8 )
-frame = 75
+frame = 19
 playing = true
 
 [node name="canvas_layer" type="CanvasLayer" parent="."]
 
 [node name="v_box_container" type="VBoxContainer" parent="canvas_layer"]
-visible = false
 margin_left = 557.0
 margin_top = 380.0
 margin_right = 716.0
@@ -718,15 +717,27 @@ __meta__ = {
 }
 
 [node name="fullscreen pls" type="Label" parent="canvas_layer"]
-visible = false
 margin_left = 3.0
-margin_top = 372.0
+margin_top = 363.0
 margin_right = 190.0
-margin_bottom = 402.0
+margin_bottom = 404.0
 theme = ExtResource( 2 )
 text = "The game runs much better in fullscreen mode.
+(Not maximized, fullscreen!)
 Framerate issues? try fullscreen!
 F11 : toggle fullscreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="version" type="Label" parent="canvas_layer"]
+margin_left = 647.0
+margin_top = 3.0
+margin_right = 718.0
+margin_bottom = 11.0
+theme = ExtResource( 2 )
+text = "v1.1.3"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

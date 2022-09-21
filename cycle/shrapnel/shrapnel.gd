@@ -16,6 +16,9 @@ func _physics_process(delta):
 	
 	$ray_cast_2d.global_rotation = 0
 	$ray_cast_2d.cast_to = linear_velocity * delta * 3
+	
+	if linear_velocity.length() < 0.1:
+		linear_velocity = Vector2()
 
 
 func _on_lifetime_timeout():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://cycle/rooms/room_rafters.tscn" type="PackedScene" id=1]
 [ext_resource path="res://_addons/intended_direction.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://cycle/rooms/room_safehouse_right.tscn" type="PackedScene" id=17]
 [ext_resource path="res://cycle/player/respawn.wav" type="AudioStream" id=18]
 [ext_resource path="res://cycle/rooms/room_maze.tscn" type="PackedScene" id=19]
+[ext_resource path="res://cycle/player/tunnel_preventor.gd" type="Script" id=20]
 [ext_resource path="res://cycle/inferno/inferno_render_400x100.png" type="Texture" id=22]
 [ext_resource path="res://cycle/inferno_hud.gd" type="Script" id=23]
 [ext_resource path="res://cycle/hud/wallet_hud.tscn" type="PackedScene" id=27]
@@ -50,6 +51,22 @@ region = Rect2( 0, 84, 51, 42 )
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 4 )
 region = Rect2( 51, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 102, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
+region = Rect2( 153, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 4 )
+region = Rect2( 204, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 4 )
+region = Rect2( 255, 84, 51, 42 )
 
 [sub_resource type="AtlasTexture" id=103]
 atlas = ExtResource( 4 )
@@ -131,33 +148,17 @@ region = Rect2( 612, 42, 51, 42 )
 atlas = ExtResource( 4 )
 region = Rect2( 663, 42, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 4 )
-region = Rect2( 102, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 4 )
-region = Rect2( 153, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 4 )
-region = Rect2( 204, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 4 )
-region = Rect2( 255, 84, 51, 42 )
-
 [sub_resource type="AtlasTexture" id=102]
 atlas = ExtResource( 4 )
 region = Rect2( 102, 126, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=101]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 126, 51, 42 )
-
 [sub_resource type="AtlasTexture" id=100]
 atlas = ExtResource( 4 )
 region = Rect2( 51, 126, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 126, 51, 42 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -171,6 +172,11 @@ animations = [ {
 "name": "jump_start",
 "speed": 15.0
 }, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 26 ), SubResource( 25 ) ],
+"loop": true,
+"name": "jump_loop",
+"speed": 17.0
+}, {
 "frames": [ SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ) ],
 "loop": false,
 "name": "idle_tap",
@@ -181,30 +187,25 @@ animations = [ {
 "name": "run",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 26 ), SubResource( 25 ) ],
-"loop": true,
-"name": "jump_loop",
-"speed": 17.0
-}, {
 "frames": [ SubResource( 102 ) ],
 "loop": false,
 "name": "attack_c",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 101 ) ],
-"loop": false,
-"name": "attack_a",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 100 ) ],
 "loop": false,
 "name": "attack_b",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 101 ) ],
+"loop": false,
+"name": "attack_a",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
-height = 22.0
+height = 26.0
 
 [sub_resource type="RayShape2D" id=2]
 length = 6.0
@@ -563,32 +564,29 @@ script = ExtResource( 3 )
 
 [node name="animated_sprite" type="AnimatedSprite" parent="world/level/player"]
 frames = SubResource( 4 )
-animation = "jump_loop"
+animation = "idle"
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="world/level/player"]
-position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
 [node name="collision_shape_2d2" type="CollisionShape2D" parent="world/level/player"]
 position = Vector2( 0, 15 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="intended_direction" parent="world/level/player" instance=ExtResource( 2 )]
 position = Vector2( 0, 0 )
 
-[node name="slope_detector" type="RayCast2D" parent="world/level/player"]
-visible = false
-cast_to = Vector2( 15, 12 )
-
 [node name="fall_ray" type="RayCast2D" parent="world/level/player"]
+visible = false
 position = Vector2( 0, 21 )
 enabled = true
 cast_to = Vector2( 0, 1 )
 
 [node name="ground_detector" type="RayCast2D" parent="world/level/player"]
-position = Vector2( 0, 20 )
+position = Vector2( 0, 19 )
 enabled = true
-cast_to = Vector2( 0, 3 )
+cast_to = Vector2( 0, 4 )
 
 [node name="label" type="Label" parent="world/level/player"]
 margin_left = -89.0
@@ -642,13 +640,13 @@ volume_db = -12.0
 bus = "Effects"
 
 [node name="coin_magnet" type="Area2D" parent="world/level/player"]
-visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource( 12 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="world/level/player/coin_magnet"]
+visible = false
 shape = SubResource( 109 )
 
 [node name="label" type="Label" parent="world/level/player/coin_magnet"]
@@ -661,18 +659,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="tunnel_preventor" type="Node2D" parent="world/level/player"]
+visible = false
+script = ExtResource( 20 )
+body_path = NodePath("..")
+active = false
+
+[node name="ray_1" type="RayCast2D" parent="world/level/player/tunnel_preventor"]
+position = Vector2( -6.5, 0 )
+enabled = true
+
+[node name="ray_2" type="RayCast2D" parent="world/level/player/tunnel_preventor"]
+position = Vector2( 6.5, 0 )
+enabled = true
+
+[node name="ray_3" type="RayCast2D" parent="world/level/player/tunnel_preventor"]
+position = Vector2( 0, -18.5 )
+enabled = true
+
 [node name="room_unloader_maze" type="Node2D" parent="world/level"]
 position = Vector2( -1352, 368 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 19 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_maze"]
-position = Vector2( 489, -127 )
+position = Vector2( 489, -1085 )
 z_index = -20
-rect = Rect2( -1006, -565, 2012, 1130 )
+rect = Rect2( -1006, -1523, 2012, 3046 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_maze" instance=ExtResource( 19 )]
 
 [node name="room_unloader_pyramid_scheme" type="Node2D" parent="world/level"]
 position = Vector2( 904, -144 )
@@ -680,13 +694,10 @@ script = ExtResource( 36 )
 room_scene = ExtResource( 11 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_pyramid_scheme"]
-position = Vector2( -29, -130 )
+position = Vector2( -149.5, -590.5 )
 z_index = -20
-rect = Rect2( -1170, -618, 2340, 1236 )
+rect = Rect2( -1290.5, -1150.5, 2581, 2301 )
 script = ExtResource( 37 )
-fix_it = true
-
-[node name="room" parent="world/level/room_unloader_pyramid_scheme" instance=ExtResource( 11 )]
 
 [node name="room_unloader_safehouse" type="Node2D" parent="world/level"]
 position = Vector2( -8, 0 )
@@ -694,13 +705,10 @@ script = ExtResource( 36 )
 room_scene = ExtResource( 9 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse"]
-position = Vector2( 497, 211 )
-scale = Vector2( 0.902576, 1 )
+position = Vector2( 497, 219 )
 z_index = -20
-rect = Rect2( -893, -565, 1786, 1130 )
+rect = Rect2( -806, -573, 1612, 1146 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_safehouse" instance=ExtResource( 9 )]
 
 [node name="room_unloader_crossroads" type="Node2D" parent="world/level"]
 position = Vector2( 1240, 320 )
@@ -708,25 +716,21 @@ script = ExtResource( 36 )
 room_scene = ExtResource( 13 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_crossroads"]
-position = Vector2( 323, 334.5 )
+position = Vector2( 323, 387 )
 z_index = -20
-rect = Rect2( -562, -689.5, 1124, 1379 )
+rect = Rect2( -562, -776, 1124, 1552 )
 script = ExtResource( 37 )
 
-[node name="room" parent="world/level/room_unloader_crossroads" instance=ExtResource( 13 )]
-
 [node name="room_unloader_rafters" type="Node2D" parent="world/level"]
-position = Vector2( 2288, 336 )
+position = Vector2( 2296, 336 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 1 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_rafters"]
-position = Vector2( 361, -479 )
+position = Vector2( 361, -1129.5 )
 z_index = -20
-rect = Rect2( -939, -941, 1878, 1882 )
+rect = Rect2( -939, -1591.5, 1878, 3183 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_rafters" instance=ExtResource( 1 )]
 
 [node name="room_unloader_distant_mountains" type="Node2D" parent="world/level"]
 position = Vector2( 4928, 288 )
@@ -734,13 +738,10 @@ script = ExtResource( 36 )
 room_scene = ExtResource( 8 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_distant_mountains"]
-position = Vector2( -122.5, -895 )
-scale = Vector2( 1.13953, 1.37922 )
+position = Vector2( -47.5022, -833.5 )
 z_index = -20
-rect = Rect2( -1394, -741, 2788, 1482 )
+rect = Rect2( -1663.5, -1167.5, 3327.01, 2335 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_distant_mountains" instance=ExtResource( 8 )]
 
 [node name="room_unloader_big_disco" type="Node2D" parent="world/level"]
 position = Vector2( 5040, -1896 )
@@ -753,21 +754,16 @@ z_index = -20
 rect = Rect2( -1170, -770, 2340, 1540 )
 script = ExtResource( 37 )
 
-[node name="room" parent="world/level/room_unloader_big_disco" instance=ExtResource( 10 )]
-
 [node name="room_unloader_safehouse2" type="Node2D" parent="world/level"]
 position = Vector2( 6256, -80 )
 script = ExtResource( 36 )
 room_scene = ExtResource( 17 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_safehouse2"]
-position = Vector2( 515.5, 67.5 )
-scale = Vector2( 0.7486, 0.746018 )
+position = Vector2( 515.5, 183 )
 z_index = -20
-rect = Rect2( -893, -565, 1786, 1130 )
+rect = Rect2( -668.5, -537, 1337, 1074 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_safehouse2" instance=ExtResource( 17 )]
 
 [node name="room_unloader_big_drop" type="Node2D" parent="world/level"]
 position = Vector2( 2184, 1088 )
@@ -776,12 +772,9 @@ room_scene = ExtResource( 14 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_big_drop"]
 position = Vector2( 1300.5, -154.5 )
-scale = Vector2( 3.02402, 0.766181 )
 z_index = -20
-rect = Rect2( -562, -618, 1124, 1236 )
+rect = Rect2( -1699.5, -473.5, 3399, 947 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_big_drop" instance=ExtResource( 14 )]
 
 [node name="room_unloader_conveyer" type="Node2D" parent="world/level"]
 position = Vector2( 5192, 688 )
@@ -790,12 +783,9 @@ room_scene = ExtResource( 15 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_conveyer"]
 position = Vector2( 1039.25, 314.25 )
-scale = Vector2( 2.25934, 0.811893 )
 z_index = -20
-rect = Rect2( -562, -618, 1124, 1236 )
+rect = Rect2( -1288.75, -501.75, 2577.5, 1003.5 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_conveyer" instance=ExtResource( 15 )]
 
 [node name="room_unloader_spiral" type="Node2D" parent="world/level"]
 position = Vector2( 7520, 32 )
@@ -803,12 +793,10 @@ script = ExtResource( 36 )
 room_scene = ExtResource( 16 )
 
 [node name="visibility_notifier_2d" type="VisibilityNotifier2D" parent="world/level/room_unloader_spiral"]
-position = Vector2( 1551, 579.5 )
+position = Vector2( 1490.5, -434.5 )
 z_index = -20
-rect = Rect2( -1950, -791.5, 3900, 1583 )
+rect = Rect2( -2010.5, -1805.5, 4021, 3611 )
 script = ExtResource( 37 )
-
-[node name="room" parent="world/level/room_unloader_spiral" instance=ExtResource( 16 )]
 
 [node name="spawn_position_left" type="Position2D" parent="world"]
 position = Vector2( 554, 300 )

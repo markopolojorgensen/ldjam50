@@ -123,10 +123,10 @@ curve = SubResource( 8 )
 [node name="path_follow_2d" type="PathFollow2D" parent="path_2d"]
 position = Vector2( 0, -10 )
 rotate = false
+cubic_interp = false
 
 [node name="particles_2d" type="Particles2D" parent="path_2d/path_follow_2d"]
 position = Vector2( -106, 1 )
-scale = Vector2( 1.00124, 1 )
 emitting = false
 amount = 64
 local_coords = false

@@ -61,6 +61,22 @@ region = Rect2( 204, 168, 51, 42 )
 atlas = ExtResource( 6 )
 region = Rect2( 255, 168, 51, 42 )
 
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 6 )
+region = Rect2( 102, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 6 )
+region = Rect2( 153, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 6 )
+region = Rect2( 204, 84, 51, 42 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 6 )
+region = Rect2( 255, 84, 51, 42 )
+
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 42, 51, 42 )
@@ -117,29 +133,13 @@ region = Rect2( 612, 42, 51, 42 )
 atlas = ExtResource( 6 )
 region = Rect2( 663, 42, 51, 42 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=101]
 atlas = ExtResource( 6 )
-region = Rect2( 102, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 6 )
-region = Rect2( 153, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 6 )
-region = Rect2( 204, 84, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 6 )
-region = Rect2( 255, 84, 51, 42 )
+region = Rect2( 0, 126, 51, 42 )
 
 [sub_resource type="AtlasTexture" id=102]
 atlas = ExtResource( 6 )
 region = Rect2( 102, 126, 51, 42 )
-
-[sub_resource type="AtlasTexture" id=101]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 126, 51, 42 )
 
 [sub_resource type="AtlasTexture" id=100]
 atlas = ExtResource( 6 )
@@ -162,24 +162,24 @@ animations = [ {
 "name": "idle_tap",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
-"name": "run",
-"speed": 15.0
-}, {
 "frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 26 ), SubResource( 25 ) ],
 "loop": true,
 "name": "jump_loop",
 "speed": 17.0
 }, {
-"frames": [ SubResource( 102 ) ],
-"loop": false,
-"name": "attack_c",
-"speed": 5.0
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "run",
+"speed": 15.0
 }, {
 "frames": [ SubResource( 101 ) ],
 "loop": false,
 "name": "attack_a",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 102 ) ],
+"loop": false,
+"name": "attack_c",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 100 ) ],
@@ -596,7 +596,7 @@ margin_top = 3.0
 margin_right = 99.0
 margin_bottom = 11.0
 theme = ExtResource( 12 )
-text = "Space / up : jump"
+text = "Space / up / c : jump"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

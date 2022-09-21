@@ -60,6 +60,11 @@ tracks/1/keys = {
 [node name="game" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
+start_muted = true
+unlock_all_decorations = true
+invite_all_npcs = true
+super_time = true
+big_wallet = true
 
 [node name="cycle_reset_animation_player" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 8 )
@@ -122,3 +127,4 @@ one_shot = true
 layer = 11
 
 [node name="logo_intro" parent="canvas_layer" instance=ExtResource( 2 )]
+skip = true

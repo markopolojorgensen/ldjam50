@@ -69,6 +69,7 @@ func actually_respawn_player():
 		return
 	
 	level.add_child(global.current_player)
+	global.current_player.linear_velocity = Vector2()
 	global.current_player.global_position = fleeing_player.global_position
 	level.remove_child(fleeing_player)
 	camera.focus = global.current_player

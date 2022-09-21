@@ -7,6 +7,11 @@ var speed = 600
 
 var teleport_to
 
+func _enter_tree():
+	# more magic
+	# no idea why I have to do this
+	$path_2d/path_follow_2d/particles_2d.position = Vector2()
+
 func _ready():
 	$animation_player.play("circle")
 	$path_2d/path_follow_2d/particles_2d.emitting = true
@@ -16,7 +21,7 @@ func _integrate_forces(state):
 		state.transform.origin = teleport_to
 		teleport_to = null
 	
-	if global_position.distance_to(destination) < 16:
+	if global_position.distance_to(destination) < 8:
 		emit_signal("arrived")
 		state.linear_velocity = Vector2()
 	else:
